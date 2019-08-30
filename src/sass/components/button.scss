@@ -1,0 +1,19 @@
+.button{
+    font-size: 1.1rem;
+    display: inline-block;
+    padding: 0.8em 2.5em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    @include transition();
+}
+
+.button-success{
+    background-color: $secondary;
+    color: $white;
+}
+
+.button-error{
+    background-color: $error;
+    color: $white;
+}

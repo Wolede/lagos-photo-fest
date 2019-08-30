@@ -1,0 +1,53 @@
+h1,h2,h3,h4,h5,h6,p,a,li{
+    font-family: $poppins;
+}
+
+h1.header{
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 1em;
+}
+
+h2.header{
+    font-size: 2.2rem;
+    
+}
+
+h3.header{
+    font-size: 1.8rem;
+}
+
+h4.header{
+    font-size: 1.25rem;
+}
+
+p{
+    font-size: 1rem;
+}
+
+a{
+    @include transition();
+    font-size: 1rem;
+}
+
+.light{
+    font-weight: 300;
+}
+
+.regular{
+    font-weight: 400;
+}
+
+.semi-bold{
+    font-weight: 600;
+    margin-bottom: 1em;
+}
+
+.bold{
+    font-weight: 700;
+    margin-bottom: 1em;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
