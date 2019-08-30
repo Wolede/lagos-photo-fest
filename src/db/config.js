@@ -6,7 +6,7 @@ const firebaseConfig = {
     authDomain: "lagos-photo-fest.firebaseapp.com",
     databaseURL: "https://lagos-photo-fest.firebaseio.com",
     projectId: "lagos-photo-fest",
-    storageBucket: "",
+    storageBucket: "lagos-photo-fest.appspot.com",
     messagingSenderId: "663517403750",
     appId: "1:663517403750:web:c0e9d4f752ee66a7"
 };
