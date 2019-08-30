@@ -1,0 +1,10 @@
+@mixin transition(){
+    transition: all .7s cubic-bezier(.2,1,.22,1);
+}
+
+@mixin background-settings(){
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-blend-mode: overlay;
+}
