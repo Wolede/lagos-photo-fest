@@ -9,7 +9,11 @@ import Card from '../ui/Card';
 const passport = () => {
 
     return (
-        <Card/>
+
+        <div className="">
+            <Card/>
+        </div>
+
     );
 
 };
