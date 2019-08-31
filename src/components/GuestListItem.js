@@ -6,7 +6,7 @@ const GuestListItem = ({ guests }) => {
 
     return (
         <tr>
-            <td>
+            <td> 
                 FName LName
             </td>
             <td>
