@@ -18,9 +18,6 @@ const card = () =>{
                     </p>
 
 
-
-
-
                 </div>
             </div>
         </div>
