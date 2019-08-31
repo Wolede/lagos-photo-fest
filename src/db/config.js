@@ -12,8 +12,31 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
 
-const database = firebase.database()
+// const database = firebase.database()
 
-export {database};
+// export {database};
+class Firebase {
+    constructor() {
+        firebase.initializeApp(firebaseConfig);
+        this.database = firebase.database();
+        this.auth = firebase.auth();
+    }
+
+    doSignInWithEmailAndPassword = (email, password) =>
+        this.auth.signInWithEmailAndPassword(email, password);
+
+    doSignOut = () => this.auth.signOut();
+
+    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+
+    doPasswordUpdate = password =>
+        this.auth.currentUser.updatePassword(password);
+
+    getGuestById = uid => this.db.ref(`guests/${uid}`);
+
+    getGuests = () => this.database.ref('guests');
+}
+
+export default Firebase;
