@@ -1,8 +1,47 @@
-import React, { Component } from 'react'
-import Form from '../components/Form'
-import GuestList from './GuestList'
+import React, { Component } from 'react';
+import { withRouter,  } from 'react-router-dom';
+import { compose } from 'recompose';
 
-export default class Home extends Component {
+// Firebase
+import { withFirebase } from './../db';
+
+// Redux
+import { connect } from 'react-redux';
+
+import Form from '../components/Form';
+
+class Home extends Component {
+    state = {
+        first_name: '',
+        last_name: '',
+        email: '',
+        guest_image: ''
+    }
+    
+    onChangeHandler = ({ name, value}) => {
+        console.log(name);
+        console.log(value);
+        this.setState({
+            [name]: value
+        });
+    }
+
+    submitHandler = () => {
+        const response = this.validateInputs(this.state);
+        if(response){
+            this.props.history.push({
+                pathname:'/passport',
+                state: { 
+                    guestDetails: { ...this.state }
+                }
+            });
+        }
+    }
+
+    validateInputs = ({ first_name, last_name, email, guest_image }) => {
+        return true;
+    }
+
     render() {
         return (
             <section className="home">
@@ -27,7 +66,9 @@ export default class Home extends Component {
                     </div>
                     <div className="col-1">
                         <div className="form-wrapper">
-                            <Form />
+                            <Form 
+                                onClick={this.submitHandler}
+                                onChange={this.onChangeHandler}/>
                             <div className="text-center powered-by">powered by <a href="http://minimalyst.design" target="_blank">minimalyst.design</a></div>
                         </div>
                     </div>
@@ -36,3 +77,17 @@ export default class Home extends Component {
         )
     }
 }
+
+const mapStateToProps = ({ isAuthenticated }) => {
+    return {
+        isAuthenticated
+    }
+}
+
+const HomeBase = compose(
+    withRouter,
+    connect(mapStateToProps),
+    withFirebase
+)(Home);
+
+export default HomeBase;
