@@ -1,0 +1,16 @@
+.passport {
+
+  &__container{
+    height: 100%;
+  }
+
+  &__div{
+    display: inline-block;
+
+    &__logo{
+      margin-top: 2rem;
+      width: 122px;
+    }
+  }
+
+}
