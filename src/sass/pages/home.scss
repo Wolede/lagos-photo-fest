@@ -1,0 +1,22 @@
+.powered-by{
+    font-size: .8rem;
+    margin-top: 1.5rem;
+    color: $light;
+    a{
+        font-size: .8rem;
+        color: $light;
+    }
+    a:hover{
+        color: $secondary;
+    }
+}
+
+.text-wrapper{
+    margin: 0 3rem auto auto;
+
+    @media (max-width: 767.98px) { 
+        text-align: center; 
+        margin: 0 auto;
+    }
+    
+}

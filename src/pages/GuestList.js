@@ -15,7 +15,7 @@ export default class GuestList extends Component {
                             <span class="search-icon"><img src={searchIcon}/></span>
                             <input placeholder="Search.."/>
                         </div>
-                        <button class="button primary">Download</button>
+                        <button class="button primary">Export</button>
                     </div>
                 </div>
                 <div className="tableWrapper">
