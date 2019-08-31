@@ -14,7 +14,8 @@ const Card = (props) => {
     } = props;
 
     return (
-        <div className="card">
+        <div id="capture" className="card">
+
             <h3 className="card__header header semi-bold">LAGOS PHOTO FESTIVAL 2019</h3>
             <div className="card__details">
                 <div className="card__main">

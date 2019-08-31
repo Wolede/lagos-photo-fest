@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+
+import html2canvas from "html2canvas";
 
 // Redux
 import { connect } from 'react-redux';
@@ -7,11 +9,11 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { compose } from 'recompose';
 
 // Firebase
-import { withFirebase } from './../db';
+import { withFirebase } from "./../db";
 
 //import component
-import Card from '../ui/Card';
-import Loader from '../ui/Loader';
+import Card from "../ui/Card";
+import Loader from "../ui/Loader";
 
 class Passport extends Component {
     state = {
@@ -64,8 +66,28 @@ class Passport extends Component {
     }
 
     handleDownload = () => {
-
-    }
+        const capture = document.querySelector("#capture")
+        console.log(capture);
+        
+      html2canvas(capture).then(canvas => {
+          // document.body.appendChild(canvas)
+          // console.log("som'n happen");
+  
+          let image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream") ;
+          let a = document.createElement('a')
+          a.setAttribute('href', image)
+          a.setAttribute('download', 'LPF-Passport.png')
+  
+          a.style.display = 'none'
+  
+          document.body.appendChild(a)
+  
+          a.click()
+  
+          document.body.removeChild(a)
+          // window.location.href = image;
+      });
+    };
 
     render(){
 
@@ -118,17 +140,15 @@ class Passport extends Component {
 };
 
 const mapStateToProps = ({ isAuthenticated }) => {
-    return {
-        isAuthenticated
-    }
-}
+  return {
+    isAuthenticated
+  };
+};
 
 const PassportBase = compose(
-    withRouter,
-    connect(mapStateToProps),
-    withFirebase
+  withRouter,
+  connect(mapStateToProps),
+  withFirebase
 )(Passport);
 
 export default PassportBase;
-
-
