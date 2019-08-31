@@ -1,0 +1,13 @@
+.logout{
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    color: $light;
+    position: absolute;
+    right: 15px;
+    top: 1rem;
+    color: $error;
+    cursor: pointer;
+}
+.logout:hover{
+    color: $secondary;
+}
