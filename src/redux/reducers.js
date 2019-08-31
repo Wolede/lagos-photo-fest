@@ -2,7 +2,7 @@ import { UPDATE_AUTHENTICATED } from './actionTypes';
 
 const initialState = {
     token: localStorage.getItem('token'),
-    isAuthenticated: null,
+    isAuthenticated: false,
     loading: true,
     user: null
 };
@@ -14,7 +14,7 @@ export default function(state = initialState, action) {
         case UPDATE_AUTHENTICATED:
             return {
                 ...state,
-                isAuthenticated: true,
+                isAuthenticated: payload,
                 loading: false,
                 user: payload
             };

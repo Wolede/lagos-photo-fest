@@ -1,20 +1,14 @@
 import React from 'react'
 
-const GuestListItem = ({ guests }) => {
+const GuestListItem = ({ guest: { firstname, lastname, email } }) => {
 
-    console.log(guests);
+    console.log(firstname);
 
     return (
         <tr>
-            <td>
-                FName LName
-            </td>
-            <td>
-                fname.lname@gmail.com
-            </td>
-            <td>
-                LP-001
-            </td>
+            <td>{`${firstname} ${lastname}`}</td>
+            <td>{email}</td>
+            <td>LP-001</td>
             <td>
                 <span class="secondary small-button">View Passport</span>
             </td>

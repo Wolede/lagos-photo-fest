@@ -67,6 +67,7 @@ class Home extends Component {
                     <div className="col-1">
                         <div className="form-wrapper">
                             <Form 
+                                inputValues={this.state} 
                                 onClick={this.submitHandler}
                                 onChange={this.onChangeHandler}/>
                             <div className="text-center powered-by">powered by <a href="http://minimalyst.design" target="_blank">minimalyst.design</a></div>

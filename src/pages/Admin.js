@@ -10,23 +10,22 @@ import { connect } from 'react-redux';
 import { updateAuthenticated } from './../redux/actions';
 
 // Custom Components
-// import Form from './../components/Form';
+import LoginForm from './../components/LoginForm';
 
 class Admin extends Component {
 
     state = {
         loading: false,
-        guests: {},
-        username: '',
+        email: '',
         password: '',
         error: null
     }
 
-    validateInput = (inputData) => {
-
+    inputValidationHandler = (inputData) => {
+        return true;
     }
 
-    onChangeHandler = ({currentTarget: { name, value}}) => {
+    inputChangeHandler = ({ name, value}) => {
         console.log(name);
         console.log(value);
         this.setState({
@@ -34,25 +33,29 @@ class Admin extends Component {
         });
     }
 
-    onSubmitHandler = (e) => {
+    submitHandler = (e) => {
+        e.preventDefault();
         console.log('here');
         console.log(this.state);
         console.log(this.props.firebase);
-        const { username, password } = this.state;
-        this.props.firebase
-            .doSignInWithEmailAndPassword(username, password)
-            .then(() => {
-                console.log('then');
-                this.setState({ ...this.state });
-                this.props.updateAuthenticated();
-                this.props.history.push('/guest-list');
-            })
-            .catch(error => {
-                console.log(error);
-                this.setState({ error });
-            });
-
-            e.preventDefault();
+        const { email, password } = this.state;
+        const response = this.inputValidationHandler(this.state);
+        if(response){
+            this.props.firebase
+                .doSignInWithEmailAndPassword(email, password)
+                .then(() => {
+                    console.log('then');
+                    this.setState({ ...this.state });
+                    this.props.updateAuthenticated(true);
+                    this.props.history.push('/guest-list');
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.setState({ error });
+                });
+        }else{
+            return false;
+        }
     }
 
     componentDidMount(){
@@ -62,36 +65,22 @@ class Admin extends Component {
     }
 
     render() {
+
         return (
-            <div className="passport-form">
-                <form>
-                    <div>
-                        <h2 className="header bold">
-                            Get Your Passport
-                        </h2>
+            <section className="home">
+                {/* <GuestList /> */}
+                <div className="flex">
+                    <div className="col-1">
+                        <div className="form-wrapper">
+                            <LoginForm 
+                                inputValues={ {...this.state} }
+                                onClick={this.submitHandler}
+                                onChange={this.inputChangeHandler}/>
+                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" target="_blank">minimalyst.design</a></div>
+                        </div>
                     </div>
-                    <div className="form-control">
-                        <input 
-                            autoComplete="off"
-                            type="text" 
-                            placeholder="User Name" 
-                            name="username" 
-                            value={this.state.username} 
-                            onChange={this.onChangeHandler}/>
-                    </div>
-                    <div className="form-control">
-                        <input 
-                            type="password" 
-                            placeholder="Last Name" 
-                            name="password" 
-                            value={this.state.password} 
-                            onChange={this.onChangeHandler}/>
-                    </div>
-                    <div className="form-control">
-                        <button type="button" onClick={this.onSubmitHandler} className="button primary"> Continue </button>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </section>
         )
     }
 }
