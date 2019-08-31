@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function Form() {
+const Form = ({ first_name, last_name, email, onChange, onClick}) => {
+    
     return (
         <div className="passport-form">
             <form>
@@ -10,21 +11,43 @@ export default function Form() {
                     </h2>
                 </div>
                 <div className="form-control">
-                    <input type="text" placeholder="First Name" name="first-name" />
+                    <input 
+                        type="text" 
+                        placeholder="First Name" 
+                        name="first_name" 
+                        onChange={(e) => onChange(e.currentTarget)}
+                        value={first_name}/>
                 </div>
                 <div className="form-control">
-                    <input type="text" placeholder="Last Name" name="last-name" />
+                    <input 
+                        type="text" 
+                        placeholder="Last Name" 
+                        name="last_name" 
+                        onChange={(e) => onChange(e.currentTarget)}
+                        value={last_name}/>
                 </div>
                 <div className="form-control">
-                    <input type="email" placeholder="Email Address" name="email-address" />
+                    <input 
+                        type="email" 
+                        placeholder="Email Address" 
+                        name="email" 
+                        onChange={(e) => onChange(e.currentTarget)}
+                        value={email}/>
                 </div>
                 <div className="form-control">
-                    <input type="file" />
+                    <input 
+                        type="file" 
+                        name="guest_image" />
                 </div>
                 <div className="form-control">
-                    <button className="button primary"> Continue </button>
+                    <button 
+                        type="button"
+                        className="button primary"
+                        onClick={onClick}> Continue </button>
                 </div>
             </form>
         </div>
     )
 }
+
+export default Form;

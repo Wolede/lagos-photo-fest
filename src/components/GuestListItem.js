@@ -1,6 +1,9 @@
 import React from 'react'
 
-export default function GuestListItem() {
+const GuestListItem = ({ guests }) => {
+
+    console.log(guests);
+
     return (
         <tr>
             <td>
@@ -18,3 +21,5 @@ export default function GuestListItem() {
         </tr>
     )
 }
+
+export default GuestListItem;

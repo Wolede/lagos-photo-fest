@@ -1,27 +1,72 @@
-import React from 'react';
+import React, { Component } from 'react';
+
+// Redux
+import { connect } from 'react-redux';
+
+import { withRouter,  } from 'react-router-dom';
+import { compose } from 'recompose';
+
+// Firebase
+import { withFirebase } from './../db';
 
 //import component
 import Card from '../ui/Card';
 
+class Passport extends Component {
+    state = {
+        loading: false
+    }
 
+    postGuestDataToFirebase = ({ first_name, last_name, email, guest_image }) => {
+        console.log(this.props.firebase.database);
+        const guestsListRef = this.props.firebase.database.ref('guests/');
+        const newGuestRef = guestsListRef.push();
 
+        newGuestRef.set({
+            firstname: first_name,
+            lastname: last_name,
+            email: email,
+            guestImage : guest_image
+        });
+        console.log('end');
+        
+    }
 
-const passport = () => {
+    confirmGuestDetails = () => {
+        this.postGuestDataToFirebase(this.state);
+    }
 
-    return (
+    backToHome = () => {
+        this.postGuestDataToFirebase(this.state);
+    }
 
-        <div className="passport__card__container">
-            <Card/>
+    render(){
 
-            <button className="button button-success passport__btn">Download</button>
+        const { location: { state: { guestDetails } } } = this.props
 
-            <a href="#" className="passport__link"> Go back</a>
-        </div>
+        return (
+            <div className="passport__card__container">
+                <Card guestDetails={ guestDetails } />
+                <button className="button button-success passport__btn">Download</button>
 
-    );
-
+                <a href="#" className="passport__link"> Go back</a>
+            </div>
+        );
+    }
 };
 
-export default passport;
+const mapStateToProps = ({ isAuthenticated }) => {
+    return {
+        isAuthenticated
+    }
+}
+
+const PassportBase = compose(
+    withRouter,
+    connect(mapStateToProps),
+    withFirebase
+)(Passport);
+
+export default PassportBase;
 
 
