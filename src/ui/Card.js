@@ -12,17 +12,39 @@ const card = () =>{
             <div className="card__details">
                 <img src={profilePic} className="card__details__img" alt="profile image"/>
 
-                <div className="card__details--info">
-                    <p className="regular">
-                        FIRST NAME
-                    </p>
+                <div className="card__info">
+                    <div className="card__details--info">
+                        <p className="regular card__details--info__p">
+                            FIRST NAME
+                        </p>
+                        <h2 className="semi-bold">
+                            LEDE
+                        </h2>
+                    </div>
 
+                    <div className="card__details--info">
+                        <p className="regular">
+                            FIRST NAME
+                        </p>
+                        <h2 className="semi-bold">
+                            LEDE
+                        </h2>
+                    </div>
 
-
-
-
+                    <div className="card__details--info">
+                        <p className="regular">
+                            FIRST NAME
+                        </p>
+                        <h2 className="semi-bold">
+                            LEDE
+                        </h2>
+                    </div>
                 </div>
+
+
             </div>
+
+
         </div>
     );
 
