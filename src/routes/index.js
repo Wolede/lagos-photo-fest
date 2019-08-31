@@ -4,6 +4,10 @@ import { Switch, Route } from 'react-router-dom';
 // Custom Route
 import PrivateRoute from './PrivateRoute';
 
+//CSS style
+import "../sass/main.scss";
+
+
 // Pages
 import Home from '../pages/Home';
 import Passport from '../pages/Passport';
@@ -12,13 +16,15 @@ import GuestList from '../pages/GuestList'; // Protected Page
 
 const Router = () => {
 	return (
-		<Switch>
-			<Route exact path="/" component={Home} />
-			<Route exact path="/passport" component={Passport} />
-            <Route exact path="/admin" component={Admin} />
-			<PrivateRoute exact path="/guest-list" component={GuestList} />
-		</Switch>
+		<div className="cover__image">
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/passport" component={Passport} />
+				<Route exact path="/admin" component={Admin} />
+				<PrivateRoute exact path="/guest-list" component={GuestList} />
+			</Switch>
+		</div>
 	);
-}
+};
 
 export default Router

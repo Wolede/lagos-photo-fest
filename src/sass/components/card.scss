@@ -1,0 +1,23 @@
+.card{
+  width: 674px;
+  height: 377px;
+  background-color: $white;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 1.5rem 3rem;
+
+  &__header{
+
+  }
+
+  &__details{
+
+    &__img{
+      width: 163px;
+      height: 197px;
+      border-radius: 10px;
+      background-size: cover;
+    }
+  }
+
+}

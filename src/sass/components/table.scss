@@ -10,13 +10,15 @@ table{
     }
     td {
         padding: 1.6rem .8rem 1.6rem .8rem;
-        background-color: $white;
     }
     thead td:first-child{
         padding-left: 1.6rem;
     }
     thead td{
         color: $white;
+    }
+    tbody td{
+        background-color: $white;
     }
     tbody td:first-child{
         padding-left: 1.6rem;
