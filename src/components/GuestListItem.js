@@ -1,16 +1,17 @@
 import React from 'react'
 
-const GuestListItem = ({ guest: { firstname, lastname, email } }) => {
-
-    console.log(firstname);
+const GuestListItem = ({ guest: { uid, first_name, last_name, email, guest_id }, onClick }) => {
 
     return (
         <tr>
-            <td>{`${firstname} ${lastname}`}</td>
+            <td>{`${first_name} ${last_name}`}</td>
             <td>{email}</td>
-            <td>LP-001</td>
+            <td>{guest_id}</td>
             <td>
-                <span class="secondary small-button">View Passport</span>
+                <span
+                    data-id={uid} 
+                    className="secondary small-button"
+                    onClick={ e => onClick(e.target)}>View Passport</span>
             </td>
         </tr>
     )

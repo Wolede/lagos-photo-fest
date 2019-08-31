@@ -8,31 +8,54 @@ import { withFirebase } from './../db';
 // Redux
 import { connect } from 'react-redux';
 
+// Controllers
+import { generateId } from './../controllers/strings';
+
 import Form from '../components/Form';
 
 class Home extends Component {
     state = {
+        guest_id: '',
         first_name: '',
         last_name: '',
         email: '',
-        guest_image: ''
+        guest_image: null,
+        image_preview_url: null
     }
     
-    onChangeHandler = ({ name, value}) => {
-        console.log(name);
-        console.log(value);
-        this.setState({
-            [name]: value
-        });
+    onChangeHandler = (target) => {
+        const { name, value, files } = target;
+        
+        if(name === 'guest_image' || files){
+            let reader = new FileReader();
+            let file = files[0];
+            
+            reader.onloadend = () => {
+                
+                this.setState({
+                    [name]: file,
+                    image_preview_url: reader.result
+                });
+            };
+
+            reader.readAsDataURL(file);
+        }else{
+            this.setState({
+                [name]: value
+            });
+        }
     }
 
     submitHandler = () => {
         const response = this.validateInputs(this.state);
+
+        const guest_id = `LP-${generateId()}`;
+
         if(response){
             this.props.history.push({
                 pathname:'/passport',
                 state: { 
-                    guestDetails: { ...this.state }
+                    guestDetails: { ...this.state, guest_id }
                 }
             });
         }
@@ -70,7 +93,7 @@ class Home extends Component {
                                 inputValues={this.state} 
                                 onClick={this.submitHandler}
                                 onChange={this.onChangeHandler}/>
-                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" target="_blank">minimalyst.design</a></div>
+                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" without rel="noopener noreferrer" target="_blank">minimalyst.design</a></div>
                         </div>
                     </div>
                 </div>

@@ -17,8 +17,18 @@ class GuestList extends Component {
 		loading: false,
 		guests: [],
 		error: null
-	}
-
+    }
+    
+    viewGuestDetails = (target) => {
+        this.props.firebase.getGuestById(target.dataset['id']).on('value', snapshot => {
+			this.props.history.push({
+                pathname:'/passport',
+                state: { 
+                    guestDetails: { ...snapshot.val() }
+                }
+            });
+		});
+    }
 
     componentDidMount(){
 		if (!this.props.isAuthenticated) {
@@ -36,8 +46,6 @@ class GuestList extends Component {
 				...guestsObject[key],
 				uid: key,
             }));
-            
-            console.log(guestsList);
 			
 			this.setState({
 				guests: [...guestsList],
@@ -57,11 +65,14 @@ class GuestList extends Component {
         if(guests){
             renderComponent = (
                 guests.map((guest, index) => {
-                    return <GuestListItem key={index} guest={guest} />
+                    return <GuestListItem 
+                        key={index} 
+                        guest={guest}
+                        onClick={this.viewGuestDetails}/>
                 })
             );
         }else{
-            renderComponent = <td>There are no</td>
+            renderComponent = <td>There are no guest details yet</td>
         }
         
         return (
@@ -73,11 +84,11 @@ class GuestList extends Component {
                             <h2 className="header bold text-white">Guest List</h2>
                         </div>
                         <div className="col-2 text-right">
-                            <div class="search">
-                                <span class="search-icon"><img src={searchIcon} alt="" /></span>
+                            <div className="search">
+                                <span className="search-icon"><img src={searchIcon} alt="Search Icon" /></span>
                                 <input placeholder="Search.."/>
                             </div>
-                            <button class="button primary">Export</button>
+                            <button className="button primary">Export</button>
                         </div>
                     </div>
                     <div className="tableWrapper">
