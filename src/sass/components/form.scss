@@ -27,3 +27,27 @@
 
     }
 }
+
+.search { 
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+.search .search-icon { 
+    position: absolute;
+    top: 1rem;
+    left: .8rem;
+    font-size: 1.1rem;
+}
+.search input{
+    font-size: 1.1rem;
+    padding: 0.8em .8em .8em 3em;
+    border-radius: 5px;
+    border: .5px solid $dark;
+    outline: none;
+}
+.search input:focus{
+    // border-radius: 10px;
+    border: .5px solid $secondary;
+    // outline: none;
+}

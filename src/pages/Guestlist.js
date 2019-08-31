@@ -1,9 +1,38 @@
 import React, { Component } from 'react'
+import GuestListItem from '../components/GuestListItem'
+import searchIcon from '../assets/images/icons-search.svg'
 
 export default class GuestList extends Component {
     render() {
         return (
-            <div>
+            <div className="container">
+                <div className="flex">
+                    <div className="col-1">
+                        <h2 className="header bold">Guest List</h2>
+                    </div>
+                    <div className="col-1 text-right">
+                        <div class="search">
+                            <span class="search-icon"><img src={searchIcon}/></span>
+                            <input placeholder="Search.."/>
+                        </div>
+                        <button class="button primary">Download</button>
+                    </div>
+                </div>
+                <div className="tableWrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Email Address</td>
+                                <td>Passport No</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <GuestListItem />
+                        </tbody>
+                    </table>
+                </div>
                 
             </div>
         )
