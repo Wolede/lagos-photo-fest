@@ -26,8 +26,6 @@ class Admin extends Component {
     }
 
     inputChangeHandler = ({ name, value}) => {
-        console.log(name);
-        console.log(value);
         this.setState({
             [name]: value
         });
@@ -44,13 +42,11 @@ class Admin extends Component {
             this.props.firebase
                 .doSignInWithEmailAndPassword(email, password)
                 .then(() => {
-                    console.log('then');
                     this.setState({ ...this.state });
                     this.props.updateAuthenticated(true);
                     this.props.history.push('/guest-list');
                 })
                 .catch(error => {
-                    console.log(error);
                     this.setState({ error });
                 });
         }else{
@@ -76,7 +72,7 @@ class Admin extends Component {
                                 inputValues={ {...this.state} }
                                 onClick={this.submitHandler}
                                 onChange={this.inputChangeHandler}/>
-                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" target="_blank">minimalyst.design</a></div>
+                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" without rel="noopener noreferrer" target="_blank">minimalyst.design</a></div>
                         </div>
                     </div>
                 </div>

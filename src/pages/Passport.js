@@ -24,23 +24,44 @@ class Passport extends Component {
         buttonError: ""
     }
 
-    postGuestDataToFirebase = ({ first_name, last_name, email, guest_image }) => {
-        console.log(this.props.firebase.database);
+    postGuestDataToFirebase = ({ guest_id, first_name, last_name, email, guest_image }) => {
         const guestsListRef = this.props.firebase.database.ref('guests/');
         const newGuestRef = guestsListRef.push();
 
         newGuestRef.set({
-            firstname: first_name,
-            lastname: last_name,
-            email: email,
-            guestImage : guest_image
+            guest_id,
+            first_name,
+            last_name,
+            email,
+            guest_image
         });
-        console.log('end');
+        
+        // Get a reference to the storage service, which is used to create references in your storage bucket
+        const uploadTask = this.props.firebase.storage
+                            .ref(`images/${guest_image.name}`)
+                            .put(guest_image);
+
+        uploadTask
+            .on('state_changed', snapshot => {
+
+            }, error => {
+                return false;
+            }, complete => {
+                return true;
+            })
         
     }
 
     confirmGuestDetails = () => {
-        this.postGuestDataToFirebase(this.state);
+        this.setState({loading: true})
+        const response = this.postGuestDataToFirebase(this.props.location.state.guestDetails);
+        if(response){
+            // if successful
+            this.setState({ loading: false, confirmButtonText: "Saved" });
+        }
+        // if error
+        // this.setState({ loading: false, confirmButtonText: "An Error Occured!", buttonError: "button-error" })
+        this.setState({ loading: false, confirmed: true });
     }
 
     goBack = (e) => {
@@ -48,50 +69,34 @@ class Passport extends Component {
         this.props.history.goBack();
     }
 
-    handleConfirm = () => {
-
-        this.setState({loading: true})
-
-        setTimeout(() => { //this should change to the ajax method
-            // if successful
-            this.setState({ loading: false, confirmButtonText: "Saved" })
-
-            // if error
-            // this.setState({ loading: false, confirmButtonText: "An Error Occured!", buttonError: "button-error" })
-        }, 2000)
-
-        setTimeout(() => {
-            this.setState({ loading: false, confirmed: true })
-        }, 4000)
-    }
-
     handleDownload = () => {
         const capture = document.querySelector("#capture")
         console.log(capture);
         
-      html2canvas(capture).then(canvas => {
-          // document.body.appendChild(canvas)
-          // console.log("som'n happen");
-  
-          let image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream") ;
-          let a = document.createElement('a')
-          a.setAttribute('href', image)
-          a.setAttribute('download', 'LPF-Passport.png')
-  
-          a.style.display = 'none'
-  
-          document.body.appendChild(a)
-  
-          a.click()
-  
-          document.body.removeChild(a)
-          // window.location.href = image;
-      });
+        html2canvas(capture).then(canvas => {
+            // document.body.appendChild(canvas)
+            // console.log("som'n happen");
+    
+            let image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream") ;
+            let a = document.createElement('a')
+            a.setAttribute('href', image)
+            a.setAttribute('download', 'LPF-Passport.png')
+    
+            a.style.display = 'none'
+    
+            document.body.appendChild(a)
+    
+            a.click()
+    
+            document.body.removeChild(a)
+            // window.location.href = image;
+        });
     };
 
     render(){
 
         const { 
+            isAuthenticated,
             location: { 
                 state 
             } 
@@ -107,13 +112,15 @@ class Passport extends Component {
 
         return (
             <div className="passport__card__container">
-                <Card guestDetails={ guestDetails } />
+                <Card 
+                    guestDetails={ guestDetails } 
+                    isAuthenticated={isAuthenticated}/>
                 
                 <div>
                 {
                     this.state.confirmed === false && (
                         //confirm button
-                        <button onClick={this.handleConfirm} className={`button secondary passport__btn ${this.state.buttonError}`}>
+                        <button onClick={this.confirmGuestDetails} className={`button secondary passport__btn ${this.state.buttonError}`}>
                             { this.state.loading === true ? <Loader/> : this.state.confirmButtonText }
                         </button>
                     )
@@ -140,15 +147,15 @@ class Passport extends Component {
 };
 
 const mapStateToProps = ({ isAuthenticated }) => {
-  return {
-    isAuthenticated
-  };
+    return {
+        isAuthenticated
+    };
 };
 
 const PassportBase = compose(
-  withRouter,
-  connect(mapStateToProps),
-  withFirebase
+    withRouter,
+    connect(mapStateToProps),
+    withFirebase
 )(Passport);
 
 export default PassportBase;

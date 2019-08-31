@@ -10,17 +10,13 @@ const firebaseConfig = {
     messagingSenderId: "663517403750",
     appId: "1:663517403750:web:c0e9d4f752ee66a7"
 };
-
-// Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
-
-// const database = firebase.database()
-
-// export {database};
+ 
 class Firebase {
     constructor() {
+        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         this.database = firebase.database();
+        this.storage = firebase.storage();
         this.auth = firebase.auth();
     }
 
@@ -34,7 +30,7 @@ class Firebase {
     doPasswordUpdate = password =>
         this.auth.currentUser.updatePassword(password);
 
-    getGuestById = uid => this.db.ref(`guests/${uid}`);
+    getGuestById = uid => this.database.ref(`guests/${uid}`);
 
     getGuests = () => this.database.ref('guests');
 }

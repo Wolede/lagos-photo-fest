@@ -1,7 +1,6 @@
 import React from 'react'
 
-const Form = ({ inputValues: { first_name, last_name, email }, onChange, onClick }) => {
-    console.log(first_name);
+const Form = ({ inputValues: { first_name, last_name, email }, onChange, onClick}) => {
     
     return (
         <div className="passport-form">
@@ -38,7 +37,8 @@ const Form = ({ inputValues: { first_name, last_name, email }, onChange, onClick
                 <div className="form-control">
                     <input 
                         type="file" 
-                        name="guest_image" />
+                        name="guest_image"
+                        onChange={(e) => onChange(e.currentTarget)}/>
                 </div>
                 <div className="form-control">
                     <button 

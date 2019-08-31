@@ -7,9 +7,13 @@ import logo from "../assets/images/logo.png";
 const Card = (props) => {
 
     const { 
-        guestDetails: { 
+        isAuthenticated,
+        guestDetails: {
+            guest_id, 
             first_name, 
-            last_name 
+            last_name,
+            guest_image,
+            image_preview_url
         } 
     } = props;
 
@@ -19,7 +23,7 @@ const Card = (props) => {
             <h3 className="card__header header semi-bold">LAGOS PHOTO FESTIVAL 2019</h3>
             <div className="card__details">
                 <div className="card__main">
-                    <img src={profilePic} className="card__details__img" alt="Guest Profile"/>
+                    <img src={(isAuthenticated) ?  guest_image : image_preview_url} className="card__details__img" alt="Guest Profile"/>
                     <div className="card__info">
                         <div className="card__details--info">
                             <p className="regular card__details--info__p">First Name</p>
@@ -32,7 +36,7 @@ const Card = (props) => {
 
                         <div className="card__details--info">
                             <p className="regular card__details--info__p">Passport No</p>
-                            <h2 className="semi-bold card__details--info__h">LP-001</h2>
+                            <h2 className="semi-bold card__details--info__h">{ guest_id }</h2>
                         </div>
                     </div>
                 </div>
