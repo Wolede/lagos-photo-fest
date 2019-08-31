@@ -16,7 +16,9 @@ class Passport extends Component {
     state = {
         loading: false,
         loaded: false,
-        confirm: true
+        confirmed: false, //confirm should be true when coming from the Guest List Page
+        confirmButtonText: "Confirm Details and Save",
+        buttonError: ""
     }
 
     postGuestDataToFirebase = ({ first_name, last_name, email, guest_image }) => {
@@ -46,9 +48,17 @@ class Passport extends Component {
 
         this.setState({loading: true})
 
-        setTimeout(() => {
-            this.setState({loading: false, confirm: false })
+        setTimeout(() => { //this should change to the ajax method
+            // if successful
+            this.setState({ loading: false, confirmButtonText: "Saved" })
+
+            // if error
+            // this.setState({ loading: false, confirmButtonText: "An Error Occured!", buttonError: "button-error" })
         }, 2000)
+
+        setTimeout(() => {
+            this.setState({ loading: false, confirmed: true })
+        }, 4000)
     }
 
     handleDownload = () => {
@@ -65,18 +75,18 @@ class Passport extends Component {
                 
                 <div>
                 {
-                    this.state.confirm === true && (
+                    this.state.confirmed === false && (
                         //confirm button
-                        <button onClick={this.handleConfirm} className="button secondary passport__btn">
-                            { this.state.loading === true ? <Loader/> : "Confirm Details and Save"}
+                        <button onClick={this.handleConfirm} className={`button secondary passport__btn ${this.state.buttonError}`}>
+                            { this.state.loading === true ? <Loader/> : this.state.confirmButtonText }
                         </button>
                     )
                 }
 
                 {
-                    this.state.confirm === false && (
+                    this.state.confirmed === true && (
                         //download button
-                        <button onClick={this.handleDownload} className={`button primary passport__btn`}>
+                        <button onClick={this.handleDownload} className={`button primary passport__btn ${this.state.buttonError}`}>
                             Download
                         </button>
                     )
