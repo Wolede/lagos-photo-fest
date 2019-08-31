@@ -5,18 +5,62 @@
   border-radius: 10px;
   overflow: hidden;
   padding: 1.5rem 3rem;
+  margin-top: 8rem;
+
+  &__main{
+    display: flex;
+  }
+
+
 
   &__header{
+    text-align: center;
+  }
+
+  &__info{
+    display: flex;
+    flex-direction: column;
 
   }
 
   &__details{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
 
     &__img{
       width: 163px;
       height: 197px;
       border-radius: 10px;
       background-size: cover;
+      margin-right: 2.5rem;
+    }
+
+    &--info{
+      /*margin-bottom: 1.5rem;*/
+
+      &__p{
+        margin: 0;
+      }
+
+      &__h{
+        margin: 0;
+      }
+
+    }
+  }
+
+  &__aside{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    &__p{
+      text-align: center;
+    }
+
+    &__img{
+      width: 122px;
     }
   }
 

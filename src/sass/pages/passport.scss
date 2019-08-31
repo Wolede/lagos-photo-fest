@@ -1,16 +1,30 @@
 .passport {
 
-  &__container{
-    height: 100%;
+
+  &__card__container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    min-height: 100vh;
   }
 
   &__div{
-    display: inline-block;
 
     &__logo{
-      margin-top: 2rem;
       width: 122px;
+      margin-top: 2.5rem;
     }
+  }
+
+  &__btn{
+    margin-top: 3rem;
+  }
+
+  &__link{
+    color: $white;
   }
 
 }
