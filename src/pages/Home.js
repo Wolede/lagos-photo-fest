@@ -5,7 +5,8 @@ import GuestList from './GuestList'
 export default class Home extends Component {
     render() {
         return (
-            <div>
+            <section className="home">
+                {/* <GuestList /> */}
                 <div className="flex">
                     <div className="col-1">
                         <div className="text-wrapper text-white"> 
@@ -31,7 +32,7 @@ export default class Home extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         )
     }
 }
