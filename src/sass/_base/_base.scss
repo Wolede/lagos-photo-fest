@@ -76,6 +76,9 @@ ul{
 
 }
 
+.text-white{
+    color: $white;
+}
 .text-right{
     text-align: right;
 }
@@ -109,7 +112,6 @@ ul{
     transform: translateY(-3px);
     box-shadow: 0px 20px 20px rgba($color: $primary, $alpha: 0.3);
 }
-
 
 .cover__image{
     background-image: url("../../assets/images/background.jpg");

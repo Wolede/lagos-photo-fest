@@ -8,9 +8,9 @@ export default class GuestList extends Component {
             <div className="container">
                 <div className="flex">
                     <div className="col-1">
-                        <h2 className="header bold">Guest List</h2>
+                        <h2 className="header bold text-white">Guest List</h2>
                     </div>
-                    <div className="col-1 text-right">
+                    <div className="col-2 text-right">
                         <div class="search">
                             <span class="search-icon"><img src={searchIcon}/></span>
                             <input placeholder="Search.."/>
