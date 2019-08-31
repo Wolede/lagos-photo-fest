@@ -10,8 +10,12 @@ const passport = () => {
 
     return (
 
-        <div className="">
+        <div className="passport__card__container">
             <Card/>
+
+            <button className="button button-success passport__btn">Download</button>
+
+            <a href="#" className="passport__link"> Go back</a>
         </div>
 
     );
