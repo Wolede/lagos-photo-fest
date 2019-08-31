@@ -21,7 +21,9 @@ const Router = () => {
 		<div className="cover__image">
 			<div className="container passport__container">
 				<div className="passport__div">
-					<img src={logo} alt="logo" className="passport__div__logo"/>
+					<a href="/">
+						<img src={logo} alt="logo" className="passport__div__logo"/>
+					</a>
 				</div>
 
 				<Switch>

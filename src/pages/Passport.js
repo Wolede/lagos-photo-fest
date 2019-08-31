@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 // Redux
 import { connect } from 'react-redux';
-import { withRouter,  } from 'react-router-dom';
+
+import { withRouter, Redirect } from 'react-router-dom';
 import { compose } from 'recompose';
 
 // Firebase
@@ -40,8 +41,9 @@ class Passport extends Component {
         this.postGuestDataToFirebase(this.state);
     }
 
-    backToHome = () => {
-        this.postGuestDataToFirebase(this.state);
+    goBack = (e) => {
+        e.preventDefault();
+        this.props.history.goBack();
     }
 
     handleConfirm = () => {
@@ -67,7 +69,19 @@ class Passport extends Component {
 
     render(){
 
-        const { location: { state: { guestDetails } } } = this.props
+        const { 
+            location: { 
+                state 
+            } 
+        } = this.props;
+        
+        console.log(this.props);
+
+        if(state === undefined){
+            return <Redirect to="/" />
+        }
+
+        const { guestDetails } = state;
 
         return (
             <div className="passport__card__container">
@@ -94,7 +108,10 @@ class Passport extends Component {
 
                 </div>
 
-                <a href="#" className="passport__link"> Go back</a>
+                <a 
+                    href="#" 
+                    className="passport__link"
+                    onClick={this.goBack}> Go back</a>
             </div>
         );
     }

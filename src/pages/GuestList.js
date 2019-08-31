@@ -2,7 +2,16 @@ import React, { Component } from 'react'
 import GuestListItem from '../components/GuestListItem'
 import searchIcon from '../assets/images/icons-search.svg'
 
-export default class GuestList extends Component {
+// Redux
+import { connect } from 'react-redux';
+
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
+
+// Firebase
+import { withFirebase } from './../db';
+
+class GuestList extends Component {
 
     state = {
 		loading: false,
@@ -26,7 +35,9 @@ export default class GuestList extends Component {
 			const guestsList = Object.keys(guestsObject).map(key => ({
 				...guestsObject[key],
 				uid: key,
-			}));
+            }));
+            
+            console.log(guestsList);
 			
 			this.setState({
 				guests: [...guestsList],
@@ -40,6 +51,8 @@ export default class GuestList extends Component {
         const { guests } = this.state;
 
         let renderComponent = null ;
+
+        console.log(guests);
 
         if(guests){
             renderComponent = (
@@ -87,3 +100,17 @@ export default class GuestList extends Component {
         )
     }
 }
+
+const mapStateToProps = ({ isAuthenticated }) => {
+    return {
+        isAuthenticated
+    }
+}
+
+const GuestListBase = compose(
+    withRouter,
+    connect(mapStateToProps),
+    withFirebase
+)(GuestList);
+
+export default GuestListBase;

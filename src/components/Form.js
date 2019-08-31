@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Form = ({ first_name, last_name, email, onChange, onClick}) => {
+const Form = ({ inputValues: { first_name, last_name, email }, onChange, onClick }) => {
+    console.log(first_name);
     
     return (
         <div className="passport-form">

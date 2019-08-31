@@ -1,8 +1,8 @@
 import * as actionTypes from './actionTypes';
 
-export const updateAuthenticated = (data={}) => {
+export const updateAuthenticated = (value) => {
     return {
         type: actionTypes.UPDATE_AUTHENTICATED,
-        payload: data
+        payload: value
     }
 }
