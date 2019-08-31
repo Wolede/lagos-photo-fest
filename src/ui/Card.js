@@ -6,7 +6,7 @@ import logo from "../assets/images/logo.png";
 
 const card = () => {
     return (
-        <div className="card">
+        <div id="capture" className="card">
 
             <h3 className="card__header header semi-bold">LAGOS PHOTO FESTIVAL 2019</h3>
 
@@ -35,8 +35,6 @@ const card = () => {
                             </h2>
                         </div>
 
-<<<<<<< HEAD
-=======
                         <div className="card__details--info">
                             <p className="regular card__details--info__p">
                                 PASSPORT No
@@ -56,7 +54,6 @@ const card = () => {
 
                     <img className="card__aside__img" src={logo} alt="logo"/>
 
->>>>>>> fcb443eebb4ddec21045ae40d86b5360ba79c85c
                 </div>
 
 
