@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 // Redux
 import { connect } from 'react-redux';
-
 import { withRouter,  } from 'react-router-dom';
 import { compose } from 'recompose';
 
@@ -11,10 +10,13 @@ import { withFirebase } from './../db';
 
 //import component
 import Card from '../ui/Card';
+import Loader from '../ui/Loader';
 
 class Passport extends Component {
     state = {
-        loading: false
+        loading: false,
+        loaded: false,
+        confirm: true
     }
 
     postGuestDataToFirebase = ({ first_name, last_name, email, guest_image }) => {
@@ -40,6 +42,19 @@ class Passport extends Component {
         this.postGuestDataToFirebase(this.state);
     }
 
+    handleConfirm = () => {
+
+        this.setState({loading: true})
+
+        setTimeout(() => {
+            this.setState({loading: false, confirm: false })
+        }, 2000)
+    }
+
+    handleDownload = () => {
+
+    }
+
     render(){
 
         const { location: { state: { guestDetails } } } = this.props
@@ -47,7 +62,27 @@ class Passport extends Component {
         return (
             <div className="passport__card__container">
                 <Card guestDetails={ guestDetails } />
-                <button className="button button-success passport__btn">Download</button>
+                
+                <div>
+                {
+                    this.state.confirm === true && (
+                        //confirm button
+                        <button onClick={this.handleConfirm} className="button secondary passport__btn">
+                            { this.state.loading === true ? <Loader/> : "Confirm Details and Save"}
+                        </button>
+                    )
+                }
+
+                {
+                    this.state.confirm === false && (
+                        //download button
+                        <button onClick={this.handleDownload} className={`button primary passport__btn`}>
+                            Download
+                        </button>
+                    )
+                }
+
+                </div>
 
                 <a href="#" className="passport__link"> Go back</a>
             </div>
