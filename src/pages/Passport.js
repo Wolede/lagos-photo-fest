@@ -82,8 +82,11 @@ class Passport extends Component {
     handleDownload = () => {
         this.setState({loading: true})
         const capture = document.querySelector("#capture")
-        
-        html2canvas(capture).then(canvas => {
+        const options = {
+            scrollX: 0,
+            scrollY:  0
+        }
+        html2canvas(capture, options).then(canvas => {
             // document.body.appendChild(canvas)
             // console.log("som'n happen");
     

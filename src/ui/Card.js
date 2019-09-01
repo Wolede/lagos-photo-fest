@@ -23,6 +23,9 @@ const Card = (props) => {
             <div className="card__details">
                 <div className="card__main">
                     <img src={(isAuthenticated) ?  guest_image : image_preview_url} className="card__details__img" alt="Guest Profile"/>
+                    {/* <div className="card__details__img" style=backgroundImage: `url(${image_preview_url})`> */}
+
+                    {/* </div> */}
                     <div className="card__info">
                         <div className="card__details--info">
                             <p className="regular card__details--info__p">First Name</p>
