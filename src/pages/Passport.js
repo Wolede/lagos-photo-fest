@@ -37,14 +37,14 @@ class Passport extends Component {
         })
         .then(() => {
             // if successful
-            this.setState({ loading: false, confirmButtonText: "Saved!" });
+            this.setState({ loading: false, confirmButtonText: "Saved!!!" });
             setTimeout(() => {
                 this.setState({ loading: false, confirmed: true });
             }, 1000);
         })
         .catch((error) => {
             // if error
-            this.setState({ loading: false, confirmButtonText: "An Error Occured!", buttonError: "button-error" });
+            this.setState({ loading: false, confirmButtonText: "An Error Occured!!!", buttonError: "button-error" });
 
             setTimeout(() => {
                 this.setState({ loading: false, confirmed: false, confirmButtonText: "Saved!", buttonError: "" });
@@ -69,7 +69,7 @@ class Passport extends Component {
     }
 
     confirmGuestDetails = () => {
-        // this.setState({loading: true})
+        this.setState({loading: true})
         this.postGuestDataToFirebase(this.props.location.state.guestDetails)
 
     }
