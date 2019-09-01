@@ -1,7 +1,6 @@
 import React from 'react';
 
 //import images
-import profilePic from "../assets/images/background.jpg"
 import logo from "../assets/images/logo.png";
 
 const Card = (props) => {

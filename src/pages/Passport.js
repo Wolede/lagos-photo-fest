@@ -146,10 +146,9 @@ class Passport extends Component {
 
                 </div>
 
-                <a 
-                    href="#" 
+                <p 
                     className="passport__link"
-                    onClick={this.goBack}> Go back</a>
+                    onClick={this.goBack}> Go back</p>
             </div>
         );
     }
