@@ -2,9 +2,9 @@ import React from 'react'
 
 
 const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputValidation, emailValidation, fileTooLarge }, onChange, onClick }) => {
-    console.log(emailValidation, "email validate");
-    console.log(inputValidation, "input validate");
-    console.log(fileTooLarge, "file validate");
+    // console.log(emailValidation, "email validate");
+    // console.log(inputValidation, "input validate");
+    // console.log(fileTooLarge, "file validate");
     
     return (
         <div className="passport-form">

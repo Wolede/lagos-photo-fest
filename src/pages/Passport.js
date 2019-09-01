@@ -80,6 +80,7 @@ class Passport extends Component {
     }
 
     handleDownload = () => {
+        this.setState({loading: true})
         const capture = document.querySelector("#capture")
         
         html2canvas(capture).then(canvas => {
@@ -100,6 +101,9 @@ class Passport extends Component {
             document.body.removeChild(a)
             // window.location.href = image;
         });
+        setTimeout(() => {
+            this.setState({ loading: false });
+        }, 4000);
     };
 
     render(){
@@ -139,7 +143,7 @@ class Passport extends Component {
                     this.state.confirmed === true && (
                         //download button
                         <button onClick={this.handleDownload} className={`button primary passport__btn ${this.state.buttonError}`}>
-                            Download
+                            { this.state.loading === true ? <Loader/> : "Download" }
                         </button>
                     )
                 }

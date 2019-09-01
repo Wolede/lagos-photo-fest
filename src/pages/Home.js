@@ -71,7 +71,7 @@ class Home extends Component {
 
     validateFile = (file) => {
             let fileSize = file.size;
-            console.log("hello", fileSize);
+            // console.log("file size", fileSize);
 
             //check if file is larger than 250kb
             if(fileSize > 250000){
@@ -109,7 +109,7 @@ class Home extends Component {
 
     validateInputs = ({ first_name, last_name, email, guest_image }) => {
         let is_valid = false;
-        
+
         if(guest_image){
             is_valid = this.validateFile(guest_image)
         }
