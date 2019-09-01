@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter,  } from 'react-router-dom';
 import { compose } from 'recompose';
 
+import { exists, emailValidation } from '../controllers/validation';
+
 // Firebase
 import { withFirebase } from './../db';
 
@@ -15,7 +17,10 @@ class Home extends Component {
         first_name: '',
         last_name: '',
         email: '',
-        guest_image: ''
+        guest_image: '',
+        inputValidation: true,
+        emailValidation: false
+
     }
     
     onChangeHandler = ({ name, value}) => {
@@ -29,17 +34,42 @@ class Home extends Component {
     submitHandler = () => {
         const response = this.validateInputs(this.state);
         if(response){
+            this.setState({inputValidation: true});
             this.props.history.push({
                 pathname:'/passport',
                 state: { 
                     guestDetails: { ...this.state }
                 }
             });
+        } else {
+            this.setState({inputValidation: false});
+        }
+    }
+
+    validateEmail= (mail) => {
+        if(emailValidation(mail)){
+            return true;
+        } else {
+            return false;
         }
     }
 
     validateInputs = ({ first_name, last_name, email, guest_image }) => {
-        return true;
+        let file = document.querySelector('.fileUpload');
+
+        
+        if (exists(first_name) && exists(last_name) && exists(email) && exists(file.value)) {
+            
+            if(this.validateEmail(email)){
+                this.setState({emailValidation: true});
+                return true
+            } else {
+                this.setState({emailValidation: false});
+                return false;
+            }
+            
+        } 
+        
     }
 
     render() {
