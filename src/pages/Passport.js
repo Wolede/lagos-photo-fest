@@ -134,7 +134,7 @@ class Passport extends Component {
                 
                 <div>
                 {
-                    this.state.confirmed === false && (
+                    (this.state.confirmed === false && !this.props.isAuthenticated) && (
                         //confirm button
                         <button onClick={this.confirmGuestDetails} className={`button secondary passport__btn ${this.state.buttonError}`}>
                             { this.state.loading === true ? <Loader/> : this.state.confirmButtonText }
@@ -143,7 +143,7 @@ class Passport extends Component {
                 }
 
                 {
-                    this.state.confirmed === true && (
+                    (this.state.confirmed === true || this.props.isAuthenticated) && (
                         //download button
                         <button onClick={this.handleDownload} className={`button primary passport__btn ${this.state.buttonError}`}>
                             { this.state.loading === true ? <Loader/> : "Download" }
