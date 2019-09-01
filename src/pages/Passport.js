@@ -34,12 +34,28 @@ class Passport extends Component {
             last_name,
             email,
             guest_image
+        })
+        .then(() => {
+            // if successful
+            this.setState({ loading: false, confirmButtonText: "Saved!" });
+            setTimeout(() => {
+                this.setState({ loading: false, confirmed: true });
+            }, 1000);
+        })
+        .catch((error) => {
+            // if error
+            this.setState({ loading: false, confirmButtonText: "An Error Occured!", buttonError: "button-error" });
+
+            setTimeout(() => {
+                this.setState({ loading: false, confirmed: false, confirmButtonText: "Saved!", buttonError: "" });
+            }, 1000);
         });
         
         // Get a reference to the storage service, which is used to create references in your storage bucket
         const uploadTask = this.props.firebase.storage
                             .ref(`images/${guest_image.name}`)
                             .put(guest_image);
+                            
 
         uploadTask
             .on('state_changed', snapshot => {
@@ -53,15 +69,9 @@ class Passport extends Component {
     }
 
     confirmGuestDetails = () => {
-        this.setState({loading: true})
-        const response = this.postGuestDataToFirebase(this.props.location.state.guestDetails);
-        if(response){
-            // if successful
-            this.setState({ loading: false, confirmButtonText: "Saved" });
-        }
-        // if error
-        // this.setState({ loading: false, confirmButtonText: "An Error Occured!", buttonError: "button-error" })
-        this.setState({ loading: false, confirmed: true });
+        // this.setState({loading: true})
+        this.postGuestDataToFirebase(this.props.location.state.guestDetails)
+
     }
 
     goBack = (e) => {
@@ -71,7 +81,6 @@ class Passport extends Component {
 
     handleDownload = () => {
         const capture = document.querySelector("#capture")
-        console.log(capture);
         
         html2canvas(capture).then(canvas => {
             // document.body.appendChild(canvas)

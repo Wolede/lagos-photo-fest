@@ -93,7 +93,7 @@ class Home extends Component {
                                 inputValues={this.state} 
                                 onClick={this.submitHandler}
                                 onChange={this.onChangeHandler}/>
-                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" without rel="noopener noreferrer" target="_blank">minimalyst.design</a></div>
+                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" without="true" rel="noopener noreferrer" target="_blank">minimalyst.design</a></div>
                         </div>
                     </div>
                 </div>

@@ -40,14 +40,13 @@
             color: $white;
             display: inline-block;
             background: $primary;
-            padding: .4em .8em;
+            padding: .3em .6em;
             border-radius: 5px;
         }
         input[type="file"]::after{
             content: 'Max-Size 250kb';
             color: $dark;
         }
-
     }
 }
 

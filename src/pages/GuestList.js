@@ -10,6 +10,7 @@ import { compose } from 'recompose';
 
 // Firebase
 import { withFirebase } from './../db';
+import Logout from '../components/Logout';
 
 class GuestList extends Component {
 
@@ -18,6 +19,7 @@ class GuestList extends Component {
 		guests: [],
 		error: null
     }
+
     
     viewGuestDetails = (target) => {
         this.props.firebase.getGuestById(target.dataset['id']).on('value', snapshot => {
@@ -77,8 +79,8 @@ class GuestList extends Component {
         
         return (
             <section className="guest-list">
+                <Logout />
                 <div className="container">
-                    <p className="logout">Logout</p>
                     <div className="flex">
                         <div className="col-1">
                             <h2 className="header bold text-white">Guest List</h2>
