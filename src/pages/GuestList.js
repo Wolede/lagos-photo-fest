@@ -12,6 +12,9 @@ import { compose } from 'recompose';
 import { withFirebase } from './../db';
 import Logout from '../components/Logout';
 
+// csv export
+import { CSVLink, CSVDownload } from "react-csv";
+
 class GuestList extends Component {
 
     state = {
@@ -90,7 +93,7 @@ class GuestList extends Component {
                                 <span className="search-icon"><img src={searchIcon} alt="Search Icon" /></span>
                                 <input placeholder="Search.."/>
                             </div>
-                            <button className="button primary">Export</button>
+                            <CSVLink data={guests} className="button primary">Export</CSVLink>
                         </div>
                     </div>
                     <div className="tableWrapper">
