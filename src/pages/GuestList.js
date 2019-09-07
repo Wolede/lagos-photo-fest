@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import GuestListItem from '../components/GuestListItem'
+import GuestListItem from '../components/GuestListItem';
+import NoGuestListItem from '../components/NoGuestListItem';
 import searchIcon from '../assets/images/icons-search.svg'
 
 // Redux
@@ -10,17 +11,23 @@ import { compose } from 'recompose';
 
 // Firebase
 import { withFirebase } from './../db';
-import Logout from '../components/Logout';
 
 class GuestList extends Component {
 
     state = {
 		loading: false,
-		guests: [],
-		error: null
+		guests: null,
+        error: null,
+        searchTerm: ''
     }
 
     
+    inputChangeHandler = ({ name, value}) => {
+        this.setState({
+            [name]: value
+        });
+    }
+
     viewGuestDetails = (target) => {
         this.props.firebase.getGuestById(target.dataset['id']).on('value', snapshot => {
 			this.props.history.push({
@@ -32,9 +39,13 @@ class GuestList extends Component {
 		});
     }
 
+    componentDidUpdate(){
+
+    }
+
     componentDidMount(){
 		if (!this.props.isAuthenticated) {
-			this.props.history.push('/');
+			this.props.history.push('/admin');
 		}
 		
 		this.setState({ loading: true });
@@ -43,43 +54,78 @@ class GuestList extends Component {
 		this.props.firebase.getGuests().on('value', snapshot => {
 			console.log(snapshot);
 			console.log(snapshot.val());
-			const guestsObject = snapshot.val();
-			const guestsList = Object.keys(guestsObject).map(key => ({
-				...guestsObject[key],
-				uid: key,
-            }));
-			
-			this.setState({
-				guests: [...guestsList],
-				loading: false,
-			});
+            if(snapshot.val()){
+                const guestsObject = snapshot.val();
+                const guestsList = Object.keys(guestsObject).map(key => ({
+                    ...guestsObject[key],
+                    uid: key,
+                }));
+
+                this.setState({
+                    guests: [...guestsList],
+                    loading: false,
+                });
+                
+            }else{
+                this.setState({
+                    guests: [],
+                    loading: false,
+                });
+            }
 		});
 	}
 
     render() {
 
-        const { guests } = this.state;
+        const { guests, searchTerm } = this.state;
 
         let renderComponent = null ;
 
         console.log(guests);
-
+    
         if(guests){
-            renderComponent = (
-                guests.map((guest, index) => {
-                    return <GuestListItem 
-                        key={index} 
-                        guest={guest}
-                        onClick={this.viewGuestDetails}/>
-                })
-            );
-        }else{
-            renderComponent = <td>There are no guest details yet</td>
+            if(guests.length > 0){
+                const filteredGuestList = guests.filter(guest => {
+                    if(guest.first_name.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.last_name.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.email.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.guest_id.toLowerCase().includes(searchTerm)){
+                        return true;
+                    }
+
+                    return false;
+
+                });
+
+                if(filteredGuestList.length > 0){
+                    renderComponent = (
+                        filteredGuestList.map((guest, index) => {
+                            return <GuestListItem 
+                                key={index} 
+                                guest={guest}
+                                onClick={this.viewGuestDetails}/>
+                        })
+                    );
+                }else{
+                    renderComponent = <NoGuestListItem info="The search term does not match any result"/>
+                }
+            }else{
+                console.log(this.searchTerm)
+                renderComponent = <NoGuestListItem info="There are no guest details yet"/>
+            }
         }
         
         return (
             <section className="guest-list">
-                <Logout />
                 <div className="container">
                     <div className="flex">
                         <div className="col-1">
@@ -88,7 +134,11 @@ class GuestList extends Component {
                         <div className="col-2 text-right">
                             <div className="search">
                                 <span className="search-icon"><img src={searchIcon} alt="Search Icon" /></span>
-                                <input placeholder="Search.."/>
+                                <input 
+                                    placeholder="Search.."
+                                    name="searchTerm"
+                                    value={this.state.searchTerm}
+                                    onChange={this.inputChangeHandler}/>
                             </div>
                             <button className="button primary">Export</button>
                         </div>

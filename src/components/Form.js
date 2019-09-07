@@ -1,15 +1,29 @@
 import React from 'react'
 
 
-const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, place_of_birth, sex, nationality, guest_image, inputValidation, emailValidation, fileTooLarge }, onChange, onClick }) => {
-    // console.log(emailValidation, "email validate");
-    // console.log(inputValidation, "input validate");
-    // console.log(fileTooLarge, "file validate");
+const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, place_of_birth, sex, nationality, inputValidation, emailValidation, fileTooLarge, fileNotFound }, onChange, onClick }) => {
+    const enterHandler = () => {
+        window.addEventListener("keyup", function (event) {
+            // 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel default action
+                event.preventDefault();
+                // Trigger the button element with a click
+                // Trigger the button element with a click
+                let loginTrigger  =  document.querySelector("#loginButtonRef");
+                this.console.log(event.target);
+                if(loginTrigger && loginTrigger !== null ){
+                    loginTrigger.click();
+                }
+            }
+        });
+    };
     
+    enterHandler();
+
     return (
         <div className="passport-form">
             <form>
-                             
                 <div>
                     <h2 className="header bold">
                         Get Your Passport
@@ -44,7 +58,6 @@ const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, plac
                         value={email}
                         required
                         />
-                         
                 </div>
                 <div className="form-control">
                     <input 
@@ -67,10 +80,10 @@ const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, plac
                         />                         
                 </div>
                 <div className="form-control">
-                   <select name="sex" value={sex} onChange = {(e)=> onChange(e.currentTarget)}>
-                        <option value='M'>Male</option>
-                        <option value="F">Female</option>
-                   </select>                 
+                    <select name="sex" value={sex} onChange = {(e)=> onChange(e.currentTarget)}>
+                            <option value='M'>Male</option>
+                            <option value="F">Female</option>
+                    </select>                 
                 </div>
                 <div className="form-control">
                     <input 
@@ -88,26 +101,29 @@ const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, plac
                         name="guest_image"
                         onChange={(e) => onChange(e.currentTarget)}
                         data-max-size="2500" 
-                        accept="image/png, image/jpeg, image/jpg"
-                                            
-                        />
+                        accept="image/png, image/jpeg, image/jpg"/>
                 </div>
                 <div className="form-control">
                     <button 
                         type="button"
+                        id="loginButtonRef"
                         className="button primary"
                         onClick={onClick}> Continue </button>
-                        { (inputValidation) ? null : (emailValidation ? <span className="form-error">Enter a valid email address</span> 
-                        : <span className="form-error">Kindly ensure all fields are filled</span>) }
-
-                        { (fileTooLarge) ? 
-                        <span className="form-error">
-                            <br/>  Your image is too large. Upload smaller file
-                            <br/>  
-                            Try out <a href="http://www.imageoptimizer.net/" target="_blank" without="true" rel="noopener noreferrer">imageoptimizer.net</a> 
-                            </span> 
-                        : null}
-
+                        { (!inputValidation) ? <span className="form-error">Kindly ensure all fields are filled</span> : 
+                            (!emailValidation) ? <span className="form-error">Enter a valid email address</span> : 
+                                (fileNotFound) ? 
+                                    (<span className="form-error">
+                                        <br/>  Your have not selected a file for upload
+                                    </span> 
+                                    ): 
+                                    (fileTooLarge) ? 
+                                        (<span className="form-error">
+                                            <br/>  Your image is too large. Upload smaller file
+                                            <br/>  
+                                            Try out <a href="http://www.imageoptimizer.net/" target="_blank" without="true" rel="noopener noreferrer">imageoptimizer.net</a> 
+                                            </span> 
+                                        ):null
+                        }
                 </div>
             </form>
         </div>
