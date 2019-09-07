@@ -16,9 +16,16 @@ class GuestList extends Component {
     state = {
 		loading: false,
 		guests: [],
-		error: null
+        error: null,
+        searchTerm: ''
     }
     
+    inputChangeHandler = ({ name, value}) => {
+        this.setState({
+            [name]: value
+        });
+    }
+
     viewGuestDetails = (target) => {
         this.props.firebase.getGuestById(target.dataset['id']).on('value', snapshot => {
 			this.props.history.push({
@@ -28,6 +35,10 @@ class GuestList extends Component {
                 }
             });
 		});
+    }
+
+    componentDidUpdate(){
+
     }
 
     componentDidMount(){
@@ -86,7 +97,11 @@ class GuestList extends Component {
                         <div className="col-2 text-right">
                             <div className="search">
                                 <span className="search-icon"><img src={searchIcon} alt="Search Icon" /></span>
-                                <input placeholder="Search.."/>
+                                <input 
+                                    placeholder="Search.."
+                                    name="searchTerm"
+                                    value={this.state.searchTerm}
+                                    onChange={this.inputChangeHandler}/>
                             </div>
                             <button className="button primary">Export</button>
                         </div>
