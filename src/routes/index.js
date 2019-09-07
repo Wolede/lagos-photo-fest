@@ -6,11 +6,6 @@ import PrivateRoute from './PrivateRoute';
 
 //CSS style
 import "../sass/main.scss";
-<<<<<<< HEAD
-import logo from "../assets/images/10th-Edition-LPF-Logo.png";
-
-=======
->>>>>>> authentication
 
 // Pages
 import Home from '../pages/Home';
