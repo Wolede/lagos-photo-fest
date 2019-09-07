@@ -13,7 +13,6 @@ import { updateAuthenticated } from './../redux/actions';
 import LoginForm from './../components/LoginForm';
 
 class Admin extends Component {
-
     state = {
         loading: false,
         email: '',
@@ -31,6 +30,22 @@ class Admin extends Component {
         });
     }
 
+    enterHandler = () => {
+        window.addEventListener("keyup", function (event) {
+            // 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel default action
+                event.preventDefault();
+                // Trigger the button element with a click
+                // Trigger the button element with a click
+                let loginTrigger  =  document.querySelector("#loginButton");
+                if(loginTrigger && loginTrigger !== null ){
+                    loginTrigger.click();
+                }
+            }
+        });
+    };
+    
     submitHandler = (e) => {
         e.preventDefault();
         console.log('here');
@@ -42,8 +57,9 @@ class Admin extends Component {
             this.props.firebase
                 .doSignInWithEmailAndPassword(email, password)
                 .then(() => {
+                    console.log(this.props)
                     this.setState({ ...this.state });
-                    this.props.updateAuthenticated(true);
+                    this.props.updateAuthenticated({ authUser: {} }, true);
                     this.props.history.push('/guest-list');
                 })
                 .catch(error => {

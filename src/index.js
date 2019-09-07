@@ -9,13 +9,14 @@ import store from './redux/store';
 // Firebase
 import Firebase, { FirebaseContext } from './db';
 
-import Router from './routes/index';
+// Starter Component
+import App from './App';
  
 const app = (
     <Provider store={store}>
         <FirebaseContext.Provider value={new Firebase()}>
             <BrowserRouter>
-                <Router />
+                <App />
             </BrowserRouter>
         </FirebaseContext.Provider>
     </Provider>

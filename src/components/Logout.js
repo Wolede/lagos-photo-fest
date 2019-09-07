@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-export default function Logout() {
+const Logout = ({onClick}) => {
     return (
-        <p className="logout">Logout</p>
-    )
+        <p
+            className="logout"
+            onClick={ onClick }>Logout</p>
+    );
 }
 
+export default Logout;

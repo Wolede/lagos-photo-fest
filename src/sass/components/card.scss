@@ -1,33 +1,65 @@
 .card{
   width: 35rem;
+  background-image: url("../../assets/images/Passport-Background.jpg");
+  @include background-settings();
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0 1em 0 1em;
+  margin-top: 10rem;
+
     @media (max-width: 767.98px) { 
-        width: 80%;   
+        // width: 80%;   
     }
     @media (max-width: 575.98px) { 
       width: 100%;
-      padding: 2em 1.5em 3em 1.5em;
+      // padding: 2em 1.5em 3em 1.5em;
 
       h3{
         font-size: 1.1rem;
       }
       p{
-        font-size: .9rem;
+        // font-size: .9rem;
       }
      }
-  background-color: $white;
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 2em 3em 4em 3em;
-  margin-top: 10rem;
-
-  h3.header{
-    @media (max-width: 767.98px) { 
-      font-size: 1rem;   
+  h2{
+      font-size: 1rem;
+      @media (max-width: 400px) { 
+        font-size: .7rem;   
+      }
   }
+  .card-header{
+    display: flex;
+
+    div:first-child{
+      display: flex;
+      align-items: center;
+      p{
+        font-size: .8rem;
+        @media (max-width: 400px) { 
+          font-size: .5rem;   
+        }
+      }
+    }
+
+    div:last-child{
+      text-align: right;
+      img{
+        width: 70%;
+      }
+    }
+  }
+  .card-footer{
+    p{
+      font-size: .8rem;
+      @media (max-width: 400px) { 
+        font-size: .5rem;   
+      }
+    }
   }
 
   &__main{
     display: flex;
+    width: 70%;
   }
 
 
@@ -44,16 +76,19 @@
 
   &__details{
     display: flex;
-    justify-content: space-between;
-    margin-top: 3rem;
+    // justify-content: space-between;
+    // margin-top: 3rem;
 
     &__img{
-      width: 7rem;
-      height: 10rem;
+      width: 10rem;
+      height: 13.6rem;
+      @media (max-width: 400px) { 
+        width: 8rem;
+        height: 10rem;  
+      }
       border-radius: 10px;
-      background-size: cover;
       margin-right: 1.3rem;
-      object-fit: cover;
+      @include background-settings();
     }
 
     &--info{
@@ -61,6 +96,7 @@
 
       &__p{
         margin: 0;
+        font-size: .5rem;
       }
 
       &__h{
@@ -68,19 +104,24 @@
       }
 
     }
+    .split{
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   &__aside{
+    width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 
     &__p{
-      text-align: center;
+      font-size: .5rem;
     }
 
     &__img{
-      width: 6rem;
+      width: 100%;
     }
   }
 
