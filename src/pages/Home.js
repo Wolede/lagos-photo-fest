@@ -22,48 +22,65 @@ class Home extends Component {
         last_name: '',
         email: '',
         guest_image: null,
+        image_preview_url: null,
         inputValidation: true,
-        emailValidation: false,
-        fileTooLarge: false 
-
+        emailValidation: true,
+        fileTooLarge: false,
+        fileNotFound: false 
     }
     
     onChangeHandler = (target) => {
         const { name, value, files } = target;        
         
-
         if(name === 'guest_image' || files){
-            let reader = new FileReader();
-            let file = files[0];
-            
-
-            if(!this.validateFile(file)){
-                reader.onloadend = () => {
-                
+            if(files.length > 0){
+                let file = files[0];
+                if(!this.fileTooLarge(file)){
+                    let reader = new FileReader();
+                    reader.onloadend = () => {
+                        this.setState({
+                            [name]: file,
+                            image_preview_url: reader.result,
+                            fileTooLarge: false,
+                            fileNotFound: false,
+                        });
+                    };
+        
+                    reader.readAsDataURL(file);
+                }else{
                     this.setState({
-                        inputValidation: false,
+                        [name]: file,
                         fileTooLarge: true,
-                        [name]: file,
-                        image_preview_url: reader.result
+                        fileNotFound: false,
                     });
-                };
-
-                reader.readAsDataURL(file);
-            } else{                
-                reader.onloadend = () => {
-                
-                    this.setState({
-                        [name]: file,
-                        image_preview_url: reader.result
-                    });
-                };
-    
-                reader.readAsDataURL(file);
+                }             
+            }else{
+                this.setState({
+                    fileTooLarge: false,
+                    fileNotFound: true,
+                });
             }
         }else{
-            this.setState({
-                [name]: value
-            });
+            if(value.trim() ===''){
+                this.setState({
+                    [name]: value
+                });
+            }else{
+                const validationState = this.resetValidationState();
+                this.setState({
+                    [name]: value,
+                    ...validationState
+                });
+            }
+        }
+    }
+
+    resetValidationState = () => {
+        return {
+            inputValidation: true,
+            emailValidation: true,
+            fileTooLarge: false,
+            fileNotFound: false 
         }
     }
 
@@ -73,16 +90,13 @@ class Home extends Component {
         }
     }
 
-    validateFile = (file) => {
+    fileTooLarge = (file) => {
             let fileSize = file.size;
-            // console.log("file size", fileSize);
-
             //check if file is larger than 250kb
             if(fileSize > 250000){
-                this.setState({fileTooLarge: true})
-                return false;
-            } else {
                 return true;
+            } else {
+                return false;
             }
     }
 
@@ -91,15 +105,16 @@ class Home extends Component {
 
         if(response){
             const guest_id = `LP-${generateId()}`;
-            this.setState({inputValidation: true});
-            this.props.history.push({
+            // this.setState({inputValidation: true});
+            return this.props.history.push({
                 pathname:'/passport',
                 state: { 
                     guestDetails: { ...this.state, guest_id }
                 }
             });
         } else {
-            this.setState({inputValidation: false});
+            return false;
+            // this.setState({inputValidation: false});
         }
     }
 
@@ -111,30 +126,50 @@ class Home extends Component {
         }
     }
 
-    validateInputs = ({ first_name, last_name, email, guest_image }) => {
-        let is_valid = false;
+    validateInputs = ({ 
+        first_name, 
+        last_name, 
+        email, 
+        guest_image, 
+        inputValidation, 
+        emailValidation, 
+        fileTooLarge, 
+        fileNotFound 
+    }) => {
+        
+        inputValidation = exists(first_name) && exists(last_name) && exists(email);
+        console.log(inputValidation);
+        emailValidation = this.validateEmail(email);
+        console.log(emailValidation);
 
         if(guest_image){
-            is_valid = this.validateFile(guest_image)
+            console.log(guest_image);
+            fileTooLarge = this.fileTooLarge(guest_image);
+            console.log( fileTooLarge);
+        }else{
+            fileNotFound = true;
         }
-        
-        console.log(guest_image);
 
-
-        
-        
-        if (exists(first_name) && exists(last_name) && exists(email) && is_valid) {
-            
-            if(this.validateEmail(email)){
-                this.setState({emailValidation: true});
-                return true
-            } else {
-                this.setState({emailValidation: false});
-                return false;
-            }
-            
-        } 
-        
+        console.log(fileTooLarge);
+        if ( inputValidation && !fileTooLarge && !fileNotFound && emailValidation) {
+            console.log(true);
+            this.setState({
+                emailValidation,
+                inputValidation,
+                fileTooLarge,
+                fileNotFound
+            });
+            return true
+        } else {
+            console.log(false);
+            this.setState({
+                emailValidation,
+                inputValidation,
+                fileTooLarge,
+                fileNotFound
+            });
+            return false;
+        }
     }
 
     render() {

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputValidation, emailValidation, fileTooLarge }, onChange, onClick }) => {
+const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputValidation, emailValidation, fileTooLarge, fileNotFound }, onChange, onClick }) => {
     const enterHandler = () => {
         window.addEventListener("keyup", function (event) {
             // 13 is the "Enter" key on the keyboard
@@ -75,17 +75,21 @@ const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputV
                         id="loginButtonRef"
                         className="button primary"
                         onClick={onClick}> Continue </button>
-                        { (inputValidation) ? null : (emailValidation ? <span className="form-error">Enter a valid email address</span> 
-                        : <span className="form-error">Kindly ensure all fields are filled</span>) }
-
-                        { (fileTooLarge) ? 
-                        <span className="form-error">
-                            <br/>  Your image is too large. Upload smaller file
-                            <br/>  
-                            Try out <a href="http://www.imageoptimizer.net/" target="_blank" without="true" rel="noopener noreferrer">imageoptimizer.net</a> 
-                            </span> 
-                        : null}
-
+                        { (!inputValidation) ? <span className="form-error">Kindly ensure all fields are filled</span> : 
+                            (!emailValidation) ? <span className="form-error">Enter a valid email address</span> : 
+                                (fileNotFound) ? 
+                                    (<span className="form-error">
+                                        <br/>  Your have not selected a file for upload
+                                    </span> 
+                                    ): 
+                                    (fileTooLarge) ? 
+                                        (<span className="form-error">
+                                            <br/>  Your image is too large. Upload smaller file
+                                            <br/>  
+                                            Try out <a href="http://www.imageoptimizer.net/" target="_blank" without="true" rel="noopener noreferrer">imageoptimizer.net</a> 
+                                            </span> 
+                                        ):null
+                        }
                 </div>
             </form>
         </div>
