@@ -152,7 +152,7 @@ class Home extends Component {
                             Get a passport to ensure you have an exciting time as you experience all the events lined up this year.
                             </p>
                             <h3 className="header regular">
-                                Time: 00:00
+                                October 25 - November 13, 2019
                                 <br /><br />
                                 Location: xxxx, xxx, xxxxxxxx, xxxxx
                             </h3>
