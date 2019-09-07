@@ -12,6 +12,9 @@ import { compose } from 'recompose';
 // Firebase
 import { withFirebase } from './../db';
 
+// csv export
+import { CSVLink, CSVDownload } from "react-csv";
+
 class GuestList extends Component {
 
     state = {
@@ -140,7 +143,7 @@ class GuestList extends Component {
                                     value={this.state.searchTerm}
                                     onChange={this.inputChangeHandler}/>
                             </div>
-                            <button className="button primary">Export</button>
+                            <CSVLink data={guests} className="button primary">Export</CSVLink>
                         </div>
                     </div>
                     <div className="tableWrapper">

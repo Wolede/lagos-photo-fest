@@ -87,8 +87,8 @@
         height: 10rem;  
       }
       border-radius: 10px;
-      background-size: cover;
       margin-right: 1.3rem;
+      @include background-settings();
     }
 
     &--info{
