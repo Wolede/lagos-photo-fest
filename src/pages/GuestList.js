@@ -143,8 +143,10 @@ class GuestList extends Component {
                                     value={this.state.searchTerm}
                                     onChange={this.inputChangeHandler}/>
                             </div>
-                            { (guests) && (guests.length > 0) && <CSVLink data={guests} className="button primary">Export</CSVLink>}
-                            { ((guests) || (guests.length > 0)) && <CSVLink data={guests} className="button primary">Export</CSVLink>}
+                            { (!guests) ? <button className="button primary">Export</button> : 
+                                (guests.length > 0) ? <CSVLink data={guests} className="button primary">Export</CSVLink> : 
+                                <button className="button primary">Export</button>
+                            }
                         </div>
                     </div>
                     <div className="tableWrapper">
