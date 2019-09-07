@@ -22,8 +22,6 @@ class Home extends Component {
         last_name: '',
         email: '',
         guest_image: null,
-        // image_preview_url: null,
-        // guest_image: '',
         inputValidation: true,
         emailValidation: false,
         fileTooLarge: false 
@@ -66,6 +64,12 @@ class Home extends Component {
             this.setState({
                 [name]: value
             });
+        }
+    }
+
+    componentDidMount(){
+        if (this.props.isAuthenticated) {
+            this.props.history.push('/guest-list');
         }
     }
 

@@ -56,7 +56,7 @@ class Admin extends Component {
 
     componentDidMount(){
         if (this.props.isAuthenticated) {
-            this.props.history.push('/');
+            this.props.history.push('/guest-list');
         }
     }
 
