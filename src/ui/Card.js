@@ -12,10 +12,18 @@ const Card = (props) => {
             first_name, 
             last_name,
             guest_image,
+            place_of_birth,
+            nationality,
+            sex,
+            date_of_birth,
             image_preview_url
         } 
     } = props;
 
+    let date = new Date(date_of_birth);
+    let dateOfBirth = date.toDateString();
+    let formattedDate = dateOfBirth.substr(dateOfBirth.indexOf(' ') + 1);
+    console.log(formattedDate)
     return (
         <div id="capture" className="card">
 
@@ -35,11 +43,32 @@ const Card = (props) => {
                             <p className="regular card__details--info__p">Last Name</p>
                             <h2 className="semi-bold card__details--info__h">{last_name }</h2>
                         </div>
+                        
+                        <div className="card__details--info">
+                            <p className="regular card__details--info__p">Nationality</p>
+                            <h2 className="semi-bold card__details--info__h">{ nationality }</h2>
+                        </div>
+
+                        <div className="card__details--info">
+                            <p className="regular card__details--info__p">Date of Birth</p>
+                            <h2 className="semi-bold card__details--info__h">{ formattedDate }</h2>
+                        </div>
+
+                        <div className="card__details--info">
+                            <p className="regular card__details--info__p">Sex</p>
+                            <h2 className="semi-bold card__details--info__h">{ sex }</h2>
+                        </div>
+
+                        <div className="card__details--info">
+                            <p className="regular card__details--info__p">Place of birth</p>
+                            <h2 className="semi-bold card__details--info__h">{ place_of_birth }</h2>
+                        </div>     
 
                         <div className="card__details--info">
                             <p className="regular card__details--info__p">Passport No</p>
                             <h2 className="semi-bold card__details--info__h">{ guest_id }</h2>
-                        </div>
+                        </div>                                        
+                       
                     </div>
                 </div>
 
