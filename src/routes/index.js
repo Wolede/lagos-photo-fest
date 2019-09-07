@@ -7,7 +7,7 @@ import PrivateRoute from './PrivateRoute';
 
 //CSS style
 import "../sass/main.scss";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/10th-Edition-LPF-Logo.png";
 
 
 // Pages

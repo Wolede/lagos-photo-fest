@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputValidation, emailValidation, fileTooLarge }, onChange, onClick }) => {
+const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, place_of_birth, sex, nationality, guest_image, inputValidation, emailValidation, fileTooLarge }, onChange, onClick }) => {
     // console.log(emailValidation, "email validate");
     // console.log(inputValidation, "input validate");
     // console.log(fileTooLarge, "file validate");
@@ -45,6 +45,42 @@ const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputV
                         required
                         />
                          
+                </div>
+                <div className="form-control">
+                    <input 
+                        type="text" 
+                        placeholder="Nationality" 
+                        name="nationality" 
+                        onChange={(e) => onChange(e.currentTarget)}
+                        value={nationality}
+                        required
+                        />                         
+                </div>
+                <div className="form-control">
+                    <input 
+                        type="date" 
+                        placeholder="Date of Birth" 
+                        name="date_of_birth" 
+                        onChange={(e) => onChange(e.currentTarget)}
+                        value={date_of_birth}
+                        required
+                        />                         
+                </div>
+                <div className="form-control">
+                   <select name="sex" value={sex} onChange = {(e)=> onChange(e.currentTarget)}>
+                        <option value='M'>Male</option>
+                        <option value="F">Female</option>
+                   </select>                 
+                </div>
+                <div className="form-control">
+                    <input 
+                        type="text" 
+                        placeholder="Place of Birth" 
+                        name="place_of_birth" 
+                        onChange={(e) => onChange(e.currentTarget)}
+                        value={place_of_birth}
+                        required
+                        />                         
                 </div>
                 <div className="form-control">
                     <input className ="fileUpload"
