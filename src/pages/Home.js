@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter,  } from 'react-router-dom';
 import { compose } from 'recompose';
 
+import { exists, emailValidation } from '../controllers/validation';
+
 // Firebase
 import { withFirebase } from './../db';
 
@@ -20,25 +22,44 @@ class Home extends Component {
         last_name: '',
         email: '',
         guest_image: null,
-        image_preview_url: null
+        inputValidation: true,
+        emailValidation: false,
+        fileTooLarge: false 
+
     }
     
     onChangeHandler = (target) => {
-        const { name, value, files } = target;
+        const { name, value, files } = target;        
         
+
         if(name === 'guest_image' || files){
             let reader = new FileReader();
             let file = files[0];
             
-            reader.onloadend = () => {
-                
-                this.setState({
-                    [name]: file,
-                    image_preview_url: reader.result
-                });
-            };
 
-            reader.readAsDataURL(file);
+            if(!this.validateFile(file)){
+                reader.onloadend = () => {
+                
+                    this.setState({
+                        inputValidation: false,
+                        fileTooLarge: true,
+                        [name]: file,
+                        image_preview_url: reader.result
+                    });
+                };
+
+                reader.readAsDataURL(file);
+            } else{                
+                reader.onloadend = () => {
+                
+                    this.setState({
+                        [name]: file,
+                        image_preview_url: reader.result
+                    });
+                };
+    
+                reader.readAsDataURL(file);
+            }
         }else{
             this.setState({
                 [name]: value
@@ -46,29 +67,79 @@ class Home extends Component {
         }
     }
 
+    componentDidMount(){
+        if (this.props.isAuthenticated) {
+            this.props.history.push('/guest-list');
+        }
+    }
+
+    validateFile = (file) => {
+            let fileSize = file.size;
+            // console.log("file size", fileSize);
+
+            //check if file is larger than 250kb
+            if(fileSize > 250000){
+                this.setState({fileTooLarge: true})
+                return false;
+            } else {
+                return true;
+            }
+    }
+
     submitHandler = () => {
         const response = this.validateInputs(this.state);
 
-        const guest_id = `LP-${generateId()}`;
-
         if(response){
+            const guest_id = `LP-${generateId()}`;
+            this.setState({inputValidation: true});
             this.props.history.push({
                 pathname:'/passport',
                 state: { 
                     guestDetails: { ...this.state, guest_id }
                 }
             });
+        } else {
+            this.setState({inputValidation: false});
+        }
+    }
+
+    validateEmail= (mail) => {
+        if(emailValidation(mail)){
+            return true;
+        } else {
+            return false;
         }
     }
 
     validateInputs = ({ first_name, last_name, email, guest_image }) => {
-        return true;
+        let is_valid = false;
+
+        if(guest_image){
+            is_valid = this.validateFile(guest_image)
+        }
+        
+        console.log(guest_image);
+
+
+        
+        
+        if (exists(first_name) && exists(last_name) && exists(email) && is_valid) {
+            
+            if(this.validateEmail(email)){
+                this.setState({emailValidation: true});
+                return true
+            } else {
+                this.setState({emailValidation: false});
+                return false;
+            }
+            
+        } 
+        
     }
 
     render() {
         return (
             <section className="home">
-                {/* <GuestList /> */}
                 <div className="flex">
                     <div className="col-1">
                         <div className="text-wrapper text-white"> 
@@ -93,7 +164,7 @@ class Home extends Component {
                                 inputValues={this.state} 
                                 onClick={this.submitHandler}
                                 onChange={this.onChangeHandler}/>
-                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" without rel="noopener noreferrer" target="_blank">minimalyst.design</a></div>
+                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" without="true" rel="noopener noreferrer" target="_blank">minimalyst.design</a></div>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import GuestListItem from '../components/GuestListItem'
+import GuestListItem from '../components/GuestListItem';
+import NoGuestListItem from '../components/NoGuestListItem';
 import searchIcon from '../assets/images/icons-search.svg'
 
 // Redux
@@ -15,10 +16,11 @@ class GuestList extends Component {
 
     state = {
 		loading: false,
-		guests: [],
+		guests: null,
         error: null,
         searchTerm: ''
     }
+
     
     inputChangeHandler = ({ name, value}) => {
         this.setState({
@@ -43,7 +45,7 @@ class GuestList extends Component {
 
     componentDidMount(){
 		if (!this.props.isAuthenticated) {
-			this.props.history.push('/');
+			this.props.history.push('/admin');
 		}
 		
 		this.setState({ loading: true });
@@ -52,44 +54,79 @@ class GuestList extends Component {
 		this.props.firebase.getGuests().on('value', snapshot => {
 			console.log(snapshot);
 			console.log(snapshot.val());
-			const guestsObject = snapshot.val();
-			const guestsList = Object.keys(guestsObject).map(key => ({
-				...guestsObject[key],
-				uid: key,
-            }));
-			
-			this.setState({
-				guests: [...guestsList],
-				loading: false,
-			});
+            if(snapshot.val()){
+                const guestsObject = snapshot.val();
+                const guestsList = Object.keys(guestsObject).map(key => ({
+                    ...guestsObject[key],
+                    uid: key,
+                }));
+
+                this.setState({
+                    guests: [...guestsList],
+                    loading: false,
+                });
+                
+            }else{
+                this.setState({
+                    guests: [],
+                    loading: false,
+                });
+            }
 		});
 	}
 
     render() {
 
-        const { guests } = this.state;
+        const { guests, searchTerm } = this.state;
 
         let renderComponent = null ;
 
         console.log(guests);
-
+    
         if(guests){
-            renderComponent = (
-                guests.map((guest, index) => {
-                    return <GuestListItem 
-                        key={index} 
-                        guest={guest}
-                        onClick={this.viewGuestDetails}/>
-                })
-            );
-        }else{
-            renderComponent = <td>There are no guest details yet</td>
+            if(guests.length > 0){
+                const filteredGuestList = guests.filter(guest => {
+                    if(guest.first_name.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.last_name.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.email.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.guest_id.toLowerCase().includes(searchTerm)){
+                        return true;
+                    }
+
+                    return false;
+
+                });
+
+                if(filteredGuestList.length > 0){
+                    renderComponent = (
+                        filteredGuestList.map((guest, index) => {
+                            return <GuestListItem 
+                                key={index} 
+                                guest={guest}
+                                onClick={this.viewGuestDetails}/>
+                        })
+                    );
+                }else{
+                    renderComponent = <NoGuestListItem info="The search term does not match any result"/>
+                }
+            }else{
+                console.log(this.searchTerm)
+                renderComponent = <NoGuestListItem info="There are no guest details yet"/>
+            }
         }
         
         return (
             <section className="guest-list">
                 <div className="container">
-                    <p className="logout">Logout</p>
                     <div className="flex">
                         <div className="col-1">
                             <h2 className="header bold text-white">Guest List</h2>

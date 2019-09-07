@@ -28,7 +28,25 @@
             border: 1px solid $secondary;
             outline: none;
         }
-
+        input[type="file"]{
+            color: transparent;
+            cursor: pointer;
+        }
+        input[type="file"]::-webkit-file-upload-button {
+          visibility: hidden;
+        }
+        input[type="file"]::before{
+            content: 'Upload Image';
+            color: $white;
+            display: inline-block;
+            background: $primary;
+            padding: .3em .6em;
+            border-radius: 5px;
+        }
+        input[type="file"]::after{
+            content: 'Max-Size 250kb';
+            color: $dark;
+        }
     }
 }
 
@@ -54,4 +72,10 @@
     // border-radius: 10px;
     border: .5px solid $secondary;
     // outline: none;
+}
+
+.form-error{
+    padding: 2rem;    
+    width: 60%;
+    color: red;
 }

@@ -1,6 +1,27 @@
 import React from 'react'
 
-const LoginForm = ({ inputValues: { email, password, error, loading}, onChange, onClick }) => {
+const LoginForm = React.forwardRef(({ inputValues: { email, password, error, loading}, onChange, onClick }, ref) => {
+    
+    const enterHandler = () => {
+        window.addEventListener("keyup", function (event) {
+            // 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel default action
+                event.preventDefault();
+                // Trigger the button element with a click
+                // Trigger the button element with a click
+                let ref = React.createRef();
+                this.console.log(this.ref);
+                let loginTrigger  =  document.querySelector("#loginButtonRef");
+                if(loginTrigger && loginTrigger !== null ){
+                    loginTrigger.click();
+                }
+            }
+        });
+    };
+    
+    enterHandler();
+
     return (
         <div className="passport-form">
             <form>
@@ -27,6 +48,7 @@ const LoginForm = ({ inputValues: { email, password, error, loading}, onChange, 
                 </div>
                 <div className="form-control">
                     <button 
+                        id="loginButtonRef"
                         type="button"
                         className="button primary"
                         onClick={ onClick }> Continue </button>
@@ -35,6 +57,6 @@ const LoginForm = ({ inputValues: { email, password, error, loading}, onChange, 
             </form>
         </div>
     )
-}
+});
 
 export default LoginForm;

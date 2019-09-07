@@ -13,7 +13,6 @@ import { updateAuthenticated } from './../redux/actions';
 import LoginForm from './../components/LoginForm';
 
 class Admin extends Component {
-
     state = {
         loading: false,
         email: '',
@@ -58,8 +57,9 @@ class Admin extends Component {
             this.props.firebase
                 .doSignInWithEmailAndPassword(email, password)
                 .then(() => {
+                    console.log(this.props)
                     this.setState({ ...this.state });
-                    this.props.updateAuthenticated(true);
+                    this.props.updateAuthenticated({ authUser: {} }, true);
                     this.props.history.push('/guest-list');
                 })
                 .catch(error => {

@@ -96,14 +96,8 @@ class Passport extends Component {
 
     confirmGuestDetails = () => {
         this.setState({loading: true})
-        const response = this.postGuestDataToFirebase(this.props.location.state.guestDetails);
-        if(response){
-            // if successful
-            this.setState({ loading: false, confirmButtonText: "Saved" });
-        }
-        // if error
-        // this.setState({ loading: false, confirmButtonText: "An Error Occured!", buttonError: "button-error" })
-        this.setState({ loading: false, confirmed: true });
+        this.postGuestDataToFirebase(this.props.location.state.guestDetails)
+
     }
 
     goBack = (e) => {
@@ -112,10 +106,13 @@ class Passport extends Component {
     }
 
     handleDownload = () => {
+        this.setState({loading: true})
         const capture = document.querySelector("#capture")
-        console.log(capture);
-        
-        html2canvas(capture).then(canvas => {
+        const options = {
+            scrollX: 0,
+            scrollY:  0
+        }
+        html2canvas(capture, options).then(canvas => {
             // document.body.appendChild(canvas)
             // console.log("som'n happen");
     
@@ -133,7 +130,24 @@ class Passport extends Component {
             document.body.removeChild(a)
             // window.location.href = image;
         });
+        setTimeout(() => {
+            this.setState({ loading: false });
+        }, 4000);
     };
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.isAuthenticated !== this.props.isAuthenticated) {
+            if (!this.props.isAuthenticated) {
+                this.props.history.push('/');
+            }
+        }
+    }
+    
+    // componentDidMount(){
+	// 	if (!this.props.isAuthenticated) {
+	// 		this.props.history.push('/');
+    //     }
+    // }
 
     render(){
 
@@ -146,6 +160,10 @@ class Passport extends Component {
         
         console.log(this.props);
 
+        // if(!isAuthenticated){
+        //     return <Redirect to="/" />
+        // }
+
         if(state === undefined){
             return <Redirect to="/" />
         }
@@ -154,13 +172,14 @@ class Passport extends Component {
 
         return (
             <div className="passport__card__container">
+                {/* <Logout /> */}
                 <Card 
                     guestDetails={ guestDetails } 
                     isAuthenticated={isAuthenticated}/>
                 
                 <div>
                 {
-                    this.state.confirmed === false && (
+                    (this.state.confirmed === false && !this.props.isAuthenticated) && (
                         //confirm button
                         <button onClick={this.confirmGuestDetails} className={`button secondary passport__btn ${this.state.buttonError}`}>
                             { this.state.loading === true ? <Loader/> : this.state.confirmButtonText }
@@ -169,20 +188,19 @@ class Passport extends Component {
                 }
 
                 {
-                    this.state.confirmed === true && (
+                    (this.state.confirmed === true || this.props.isAuthenticated) && (
                         //download button
                         <button onClick={this.handleDownload} className={`button primary passport__btn ${this.state.buttonError}`}>
-                            Download
+                            { this.state.loading === true ? <Loader/> : "Download" }
                         </button>
                     )
                 }
 
                 </div>
 
-                <a 
-                    href="#" 
+                <p 
                     className="passport__link"
-                    onClick={this.goBack}> Go back</a>
+                    onClick={this.goBack}> Go back</p>
             </div>
         );
     }
