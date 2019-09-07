@@ -42,8 +42,9 @@ class Admin extends Component {
             this.props.firebase
                 .doSignInWithEmailAndPassword(email, password)
                 .then(() => {
+                    console.log(this.props)
                     this.setState({ ...this.state });
-                    this.props.updateAuthenticated(true);
+                    this.props.updateAuthenticated({ authUser: {} }, true);
                     this.props.history.push('/guest-list');
                 })
                 .catch(error => {
@@ -56,7 +57,7 @@ class Admin extends Component {
 
     componentDidMount(){
         if (this.props.isAuthenticated) {
-            this.props.history.push('/guest-list');
+            this.props.history.push('/');
         }
     }
 

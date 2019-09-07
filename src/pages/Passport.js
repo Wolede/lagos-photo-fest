@@ -109,6 +109,20 @@ class Passport extends Component {
         }, 4000);
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.isAuthenticated !== this.props.isAuthenticated) {
+            if (!this.props.isAuthenticated) {
+                this.props.history.push('/');
+            }
+        }
+    }
+    
+    // componentDidMount(){
+	// 	if (!this.props.isAuthenticated) {
+	// 		this.props.history.push('/');
+    //     }
+    // }
+
     render(){
 
         const { 
@@ -120,6 +134,10 @@ class Passport extends Component {
         
         console.log(this.props);
 
+        // if(!isAuthenticated){
+        //     return <Redirect to="/" />
+        // }
+
         if(state === undefined){
             return <Redirect to="/" />
         }
@@ -128,6 +146,7 @@ class Passport extends Component {
 
         return (
             <div className="passport__card__container">
+                {/* <Logout /> */}
                 <Card 
                     guestDetails={ guestDetails } 
                     isAuthenticated={isAuthenticated}/>
