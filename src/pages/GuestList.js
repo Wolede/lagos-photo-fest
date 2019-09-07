@@ -98,25 +98,50 @@ class GuestList extends Component {
 
     render() {
 
-        const { guests } = this.state;
+        const { guests, searchTerm } = this.state;
 
         let renderComponent = null ;
 
         console.log(guests);
-
+    
         if(guests){
             if(guests.length > 0){
-                renderComponent = (
-                    guests.map((guest, index) => {
-                        return <GuestListItem 
-                            key={index} 
-                            guest={guest}
-                            onClick={this.viewGuestDetails}/>
-                    })
-                );
+                const filteredGuestList = guests.filter(guest => {
+                    if(guest.first_name.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.last_name.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.email.includes(searchTerm)){
+                        return true;
+                    }
+
+                    if(guest.guest_id.toLowerCase().includes(searchTerm)){
+                        return true;
+                    }
+
+                    return false;
+
+                });
+
+                if(filteredGuestList.length > 0){
+                    renderComponent = (
+                        filteredGuestList.map((guest, index) => {
+                            return <GuestListItem 
+                                key={index} 
+                                guest={guest}
+                                onClick={this.viewGuestDetails}/>
+                        })
+                    );
+                }else{
+                    renderComponent = <NoGuestListItem info="The search term does not match any result"/>
+                }
             }else{
                 console.log(this.searchTerm)
-                renderComponent = <NoGuestListItem/>
+                renderComponent = <NoGuestListItem info="There are no guest details yet"/>
             }
         }
         

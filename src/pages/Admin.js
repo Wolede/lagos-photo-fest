@@ -13,7 +13,6 @@ import { updateAuthenticated } from './../redux/actions';
 import LoginForm from './../components/LoginForm';
 
 class Admin extends Component {
-
     state = {
         loading: false,
         email: '',

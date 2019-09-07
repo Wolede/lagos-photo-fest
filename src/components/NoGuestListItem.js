@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NoGuestListItem = (children) => {
+const NoGuestListItem = ({info}) => {
 
     return (
         <tr style={{
@@ -9,7 +9,7 @@ const NoGuestListItem = (children) => {
             borderRadius: "10px",
             display: "block"
             }}>
-            There are no guest details yet
+            {info}
         </tr>
     )
 }

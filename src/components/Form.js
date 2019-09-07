@@ -5,7 +5,26 @@ const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputV
     // console.log(emailValidation, "email validate");
     // console.log(inputValidation, "input validate");
     // console.log(fileTooLarge, "file validate");
+    const enterHandler = () => {
+        window.addEventListener("keyup", function (event) {
+            // 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel default action
+                event.preventDefault();
+                // Trigger the button element with a click
+                // Trigger the button element with a click
+                let ref = React.createRef();
+                this.console.log(this.ref);
+                let loginTrigger  =  document.querySelector("#loginButtonRef");
+                if(loginTrigger && loginTrigger !== null ){
+                    loginTrigger.click();
+                }
+            }
+        });
+    };
     
+    enterHandler();
+
     return (
         <div className="passport-form">
             <form>
@@ -59,6 +78,7 @@ const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputV
                 <div className="form-control">
                     <button 
                         type="button"
+                        id="loginButtonRef"
                         className="button primary"
                         onClick={onClick}> Continue </button>
                         { (inputValidation) ? null : (emailValidation ? <span className="form-error">Enter a valid email address</span> 
