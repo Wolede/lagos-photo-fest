@@ -86,9 +86,22 @@ class Passport extends Component {
                         last_name,
                         email,
                         guest_image: downloadURL
+                    })
+                    .then(() => {
+                        // if successful
+                        this.setState({ loading: false, confirmButtonText: "Saved!!!" });
+                        setTimeout(() => {
+                            this.setState({ loading: false, confirmed: true });
+                        }, 1000);
+                    })
+                    .catch((error) => {
+                        // if error
+                        this.setState({ loading: false, confirmButtonText: "An Error Occured!!!", buttonError: "button-error" });
+            
+                        setTimeout(() => {
+                            this.setState({ loading: false, confirmed: false, confirmButtonText: "Saved!", buttonError: "" });
+                        }, 1000);
                     });
-
-                    return true;
                 });
             })
         

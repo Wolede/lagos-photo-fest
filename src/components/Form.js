@@ -2,9 +2,6 @@ import React from 'react'
 
 
 const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputValidation, emailValidation, fileTooLarge }, onChange, onClick }) => {
-    // console.log(emailValidation, "email validate");
-    // console.log(inputValidation, "input validate");
-    // console.log(fileTooLarge, "file validate");
     const enterHandler = () => {
         window.addEventListener("keyup", function (event) {
             // 13 is the "Enter" key on the keyboard
@@ -13,9 +10,8 @@ const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputV
                 event.preventDefault();
                 // Trigger the button element with a click
                 // Trigger the button element with a click
-                let ref = React.createRef();
-                this.console.log(this.ref);
                 let loginTrigger  =  document.querySelector("#loginButtonRef");
+                this.console.log(event.target);
                 if(loginTrigger && loginTrigger !== null ){
                     loginTrigger.click();
                 }
@@ -28,7 +24,6 @@ const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputV
     return (
         <div className="passport-form">
             <form>
-                             
                 <div>
                     <h2 className="header bold">
                         Get Your Passport
@@ -63,7 +58,6 @@ const Form = ({ inputValues: { first_name, last_name, email, guest_image, inputV
                         value={email}
                         required
                         />
-                         
                 </div>
                 <div className="form-control">
                     <input className ="fileUpload"
