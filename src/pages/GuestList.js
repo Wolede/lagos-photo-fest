@@ -26,6 +26,8 @@ class GuestList extends Component {
 
     
     inputChangeHandler = ({ name, value}) => {
+        console.log(name);
+        console.log(value);
         this.setState({
             [name]: value
         });
@@ -141,7 +143,7 @@ class GuestList extends Component {
                                     placeholder="Search.."
                                     name="searchTerm"
                                     value={this.state.searchTerm}
-                                    onChange={this.inputChangeHandler}/>
+                                    onChange={(e) => this.inputChangeHandler(e.target)}/>
                             </div>
                             { (!guests) ? <button className="button primary">Export</button> : 
                                 (guests.length > 0) ? <CSVLink data={guests} className="button primary">Export</CSVLink> : 
