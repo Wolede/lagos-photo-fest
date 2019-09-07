@@ -25,13 +25,11 @@ class Home extends Component {
         inputValidation: true,
         emailValidation: false,
         fileTooLarge: false 
-
     }
     
     onChangeHandler = (target) => {
         const { name, value, files } = target;        
         
-
         if(name === 'guest_image' || files){
             let reader = new FileReader();
             let file = files[0];
@@ -119,9 +117,6 @@ class Home extends Component {
         }
         
         console.log(guest_image);
-
-
-        
         
         if (exists(first_name) && exists(last_name) && exists(email) && is_valid) {
             
@@ -132,9 +127,7 @@ class Home extends Component {
                 this.setState({emailValidation: false});
                 return false;
             }
-            
-        } 
-        
+        }  
     }
 
     render() {
