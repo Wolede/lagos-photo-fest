@@ -13,7 +13,7 @@ import { withFirebase } from './../db';
 import Logout from '../components/Logout';
 
 // csv export
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 class GuestList extends Component {
 
