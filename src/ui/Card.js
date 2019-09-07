@@ -20,6 +20,7 @@ const Card = (props) => {
             image_preview_url
         } 
     } = props;
+    console.log(guest_image);
 
     let date = new Date(date_of_birth);
     let dateOfBirth = date.toDateString();
