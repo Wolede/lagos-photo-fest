@@ -13,7 +13,7 @@ import { compose } from 'recompose';
 import { withFirebase } from './../db';
 
 // csv export
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 
 class GuestList extends Component {
 
@@ -143,7 +143,8 @@ class GuestList extends Component {
                                     value={this.state.searchTerm}
                                     onChange={this.inputChangeHandler}/>
                             </div>
-                            <CSVLink data={guests} className="button primary">Export</CSVLink>
+                            { (guests) && (guests.length > 0) && <CSVLink data={guests} className="button primary">Export</CSVLink>}
+                            { ((guests) || (guests.length > 0)) && <CSVLink data={guests} className="button primary">Export</CSVLink>}
                         </div>
                     </div>
                     <div className="tableWrapper">
