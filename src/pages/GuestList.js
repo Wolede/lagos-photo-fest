@@ -26,8 +26,8 @@ class GuestList extends Component {
 
     
     inputChangeHandler = ({ name, value}) => {
-        console.log(name);
-        console.log(value);
+        // console.log(name);
+        // console.log(value);
         this.setState({
             [name]: value
         });
@@ -54,11 +54,11 @@ class GuestList extends Component {
 		}
 		
 		this.setState({ loading: true });
-		console.log(this.props);
+		// console.log(this.props);
 		
 		this.props.firebase.getGuests().on('value', snapshot => {
-			console.log(snapshot);
-			console.log(snapshot.val());
+			// console.log(snapshot);
+			// console.log(snapshot.val());
             if(snapshot.val()){
                 const guestsObject = snapshot.val();
                 const guestsList = Object.keys(guestsObject).map(key => ({
@@ -86,7 +86,7 @@ class GuestList extends Component {
 
         let renderComponent = null ;
 
-        console.log(guests);
+        // console.log(guests);
     
         if(guests){
             if(guests.length > 0){
@@ -124,7 +124,7 @@ class GuestList extends Component {
                     renderComponent = <NoGuestListItem info="The search term does not match any result"/>
                 }
             }else{
-                console.log(this.searchTerm)
+                // console.log(this.searchTerm)
                 renderComponent = <NoGuestListItem info="There are no guest details yet"/>
             }
         }
