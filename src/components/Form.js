@@ -80,9 +80,10 @@ const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, plac
                         />                         
                 </div>
                 <div className="form-control">
-                   <select name="sex" onChange = {(e)=> onChange(e.currentTarget)}>
-                        <option selected value='M'>Male</option>
-                        <option value="F">Female</option>
+                    <select class="select" name="sex" onChange = {(e)=> onChange(e.currentTarget)}>
+                        <option class="select__value" disabled selected value="">Select Gender</option>
+                        <option class="select__value" value='M'>Male</option>
+                        <option class="select__value" value="F">Female</option>
                    </select>                 
                 </div>
                 <div className="form-control">
