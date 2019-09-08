@@ -21,6 +21,7 @@ class Home extends Component {
         first_name: '',
         last_name: '',
         email: '',
+        sex: 'M',
         guest_image: null,
         image_preview_url: null,
         inputValidation: true,

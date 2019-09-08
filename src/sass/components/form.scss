@@ -74,6 +74,24 @@
     // outline: none;
 }
 
+.select{
+    width: 100%;
+    margin-bottom: 1.5rem;
+    height: 3.5rem;
+    border: 0.5px solid #013042;
+    border-radius: 5px;
+    outline: none;
+    padding: 0.8em 8em;
+
+    &__value{
+        font-size: 1.1rem;
+    }
+}
+
+.select:focus{
+    border: .5px solid $secondary;
+}
+
 .form-error{
     padding: 2rem;    
     width: 60%;
