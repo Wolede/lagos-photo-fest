@@ -47,6 +47,25 @@
             content: 'Max-Size 250kb';
             color: $dark;
         }
+
+        &__2col{
+            display: flex;
+            justify-content: space-between;
+
+            @media (max-width: 450px) { 
+                flex-direction: column;
+            }
+          
+            input, select{
+               width: 45%;
+
+               @media (max-width: 450px) { 
+                width: 100%;   
+            }
+            }
+
+
+        }
     }
 }
 
@@ -81,7 +100,7 @@
     border: 0.5px solid #013042;
     border-radius: 5px;
     outline: none;
-    padding: 0.8em 8em;
+    padding: 0.8em;
 
     &__value{
         font-size: 1.1rem;
