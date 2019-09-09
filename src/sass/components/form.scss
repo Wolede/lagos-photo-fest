@@ -6,7 +6,8 @@
     max-width: 100%;
     margin: 0 auto;
     text-align: center;
-    padding: 4.5rem 4rem 4.5rem 4rem;
+    padding: 2.5rem 4rem 2.5rem 4rem;
+    // padding: 4.5rem 4rem 4.5rem 4rem;
     border-radius: 10px;
     background-color: $white;
 
@@ -17,7 +18,7 @@
         }
         input{
             padding: 0.8em .8em;
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 1.5rem;
             border: .5px solid $dark;
             border-radius: 5px;
@@ -80,7 +81,7 @@
             }
           
             input, select{
-               width: 45%;
+               width: 48%;
 
                @media (max-width: 450px) { 
                 width: 100%;   
@@ -101,10 +102,10 @@
     position: absolute;
     top: 1rem;
     left: .8rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .search input{
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding: 0.8em .8em .8em 3em;
     border-radius: 5px;
     border: .5px solid $dark;
@@ -127,7 +128,7 @@
     color: rgba($color: $black, $alpha: .7);
     
     &__value{
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 }
 
