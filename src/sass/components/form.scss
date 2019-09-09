@@ -60,6 +60,8 @@
             height: 100%;
             background-color: $white;
             color: rgba($color: $black, $alpha: .7);
+            border: .5px solid $dark;
+            border-radius: 5px;
         }
         input[type="date"]:focus::after{
             content: '';

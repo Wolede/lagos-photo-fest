@@ -189,8 +189,8 @@ class Home extends Component {
                             </p>
                             <h3 className="header regular">
                                 October 25 - November 13, 2019
-                                <br /><br />
-                                Location: xxxx, xxx, xxxxxxxx, xxxxx
+                                {/* <br /><br />
+                                Location: xxxx, xxx, xxxxxxxx, xxxxx */}
                             </h3>
                         </div>
                     </div>
