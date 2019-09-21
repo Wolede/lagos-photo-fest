@@ -70,6 +70,8 @@ class GuestList extends Component {
                     guests: [...guestsList],
                     loading: false,
                 });
+
+                // console.log(guestsList)
                 
             }else{
                 this.setState({

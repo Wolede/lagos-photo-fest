@@ -24,7 +24,7 @@ class Passport extends Component {
         buttonError: ""
     }
 
-    postGuestDataToFirebase = ({ guest_id, first_name, last_name, email, guest_image }) => {
+    postGuestDataToFirebase = ({ guest_id, first_name, last_name, email, guest_image, place_of_birth, nationality, sex, date_of_birth }) => {
         // Get a reference to the storage service, which is used to create references in your storage bucket
         console.log(guest_image);
         const uploadTask = this.props.firebase.storage
@@ -85,7 +85,11 @@ class Passport extends Component {
                         first_name,
                         last_name,
                         email,
-                        guest_image: downloadURL
+                        guest_image: downloadURL,
+                        place_of_birth,
+                        nationality,
+                        sex,
+                        date_of_birth
                     })
                     .then(() => {
                         // if successful

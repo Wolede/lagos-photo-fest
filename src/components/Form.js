@@ -79,10 +79,10 @@ const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, plac
                 </div>
                 
                 <div className="form-control form-control__2col">
-                    <select class="select" name="sex" onChange={(e) => onChange(e.currentTarget)}>
-                        <option class="select__value" disabled selected value="">Select Gender</option>
-                        <option class="select__value" value='M'>Male</option>
-                        <option class="select__value" value="F">Female</option>
+                    <select className="select" name="sex" onChange={(e) => onChange(e.currentTarget)}>
+                        <option className="select__value" disabled defaultValue value="">Select Gender</option>
+                        <option className="select__value" value='M'>Male</option>
+                        <option className="select__value" value="F">Female</option>
                     </select>
                     <input
                         type="text"
