@@ -70,7 +70,7 @@ const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, plac
                     />
                     <input
                         type="date"
-                        placeholder="Date of Birth"
+                        placeholder="Birthday"
                         name="date_of_birth"
                         onChange={(e) => onChange(e.currentTarget)}
                         value={date_of_birth}
@@ -99,7 +99,7 @@ const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, plac
                         type="file"
                         name="guest_image"
                         onChange={(e) => onChange(e.currentTarget)}
-                        data-max-size="2500"
+                        data-max-size="10000"
                         accept="image/png, image/jpeg, image/jpg" />
                 </div>
                 <div className="form-control">

@@ -18,7 +18,7 @@ const Card = (props) => {
             sex,
             date_of_birth,
             image_preview_url
-        } 
+        }
     } = props;
     console.log(guest_image);
 
@@ -74,7 +74,7 @@ const Card = (props) => {
                         </div>
                         <div className="card__details--info">
                             <p className="regular card__details--info__p">Expiry Date</p>
-                            <h2 className="semi-bold card__details--info__h">Nov 13 2019</h2>
+                            <h2 className="semi-bold card__details--info__h">Nov 15 2019</h2>
                         </div>
 
                     </div>

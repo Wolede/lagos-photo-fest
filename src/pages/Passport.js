@@ -204,7 +204,7 @@ class Passport extends Component {
                     (this.state.confirmed === true || this.props.isAuthenticated) && (
                         //download button
                         <button onClick={this.handleDownload} className={`button primary passport__btn ${this.state.buttonError}`}>
-                            { this.state.loading === true ? <Loader/> : "Download" }
+                            { this.state.loading === true ? <Loader/> : "Download and Share" }
                         </button>
                     )
                 }

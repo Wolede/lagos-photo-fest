@@ -45,7 +45,7 @@
             border-radius: 5px;
         }
         input[type="file"]::after{
-            content: 'Max-Size 250kb';
+            content: 'Max-Size 1mb';
             color: $dark;
         }
         input[type="date"]{
@@ -54,7 +54,7 @@
             background-color: $white;
         }
         input[type="date"]::after{
-            content: ': Date of Birth';
+            content: ': Birthday';
             position: absolute;
             top: 0;
             right: 0;

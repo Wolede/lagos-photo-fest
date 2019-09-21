@@ -94,7 +94,7 @@ class Home extends Component {
     fileTooLarge = (file) => {
             let fileSize = file.size;
             //check if file is larger than 250kb
-            if(fileSize > 250000){
+            if(fileSize > 100000){
                 return true;
             } else {
                 return false;
@@ -188,7 +188,7 @@ class Home extends Component {
                             Get a passport to ensure you have an exciting time as you experience all the events lined up this year.
                             </p>
                             <h3 className="header regular">
-                                October 25 - November 13, 2019
+                                October 27 - November 15, 2019
                                 {/* <br /><br />
                                 Location: xxxx, xxx, xxxxxxxx, xxxxx */}
                             </h3>
@@ -200,7 +200,7 @@ class Home extends Component {
                                 inputValues={this.state} 
                                 onClick={this.submitHandler}
                                 onChange={this.onChangeHandler}/>
-                            <div className="text-center powered-by">powered by <a href="http://minimalyst.design" without="true" rel="noopener noreferrer" target="_blank">minimalyst.design</a></div>
+                            <div className="text-center powered-by">Visit <a href="http://www.lagosphotofestival.com" without="true" rel="noopener noreferrer" target="_blank">www.lagosphotofestival.com</a></div>
                         </div>
                     </div>
                 </div>
