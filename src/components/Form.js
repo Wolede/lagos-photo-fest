@@ -74,6 +74,8 @@ const Form = ({ inputValues: { first_name, last_name, email, date_of_birth, plac
                         name="date_of_birth"
                         onChange={(e) => onChange(e.currentTarget)}
                         value={date_of_birth}
+                        min="1111-01-01" 
+                        max="1111-12-31"
                         required
                     />
                 </div>

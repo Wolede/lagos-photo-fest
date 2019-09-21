@@ -52,6 +52,9 @@
             position: relative;  
             background-image: none;  
             background-color: $white;
+            &::-webkit-datetime-edit-year-field {
+                visibility: hidden;
+            }
         }
         input[type="date"]::after{
             content: ': Birthday';

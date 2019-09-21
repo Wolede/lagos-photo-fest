@@ -22,9 +22,11 @@ const Card = (props) => {
     } = props;
     console.log(guest_image);
 
+    // formatting the date 
     let date = new Date(date_of_birth);
     let dateOfBirth = date.toDateString();
-    let formattedDate = dateOfBirth.substr(dateOfBirth.indexOf(' ') + 1);
+    let formattedDate = dateOfBirth.slice(dateOfBirth.indexOf(' ') + 1, -5); // remove Day and Year
+    // let formattedDate = dateOfBirth.substr(dateOfBirth.indexOf(' ') + 1); // remove Day
     console.log(formattedDate)
     return (
         <div id="capture" className="card">
