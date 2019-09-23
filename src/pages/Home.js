@@ -21,7 +21,7 @@ class Home extends Component {
         first_name: '',
         last_name: '',
         email: '',
-        sex: 'M',
+        sex: '',
         guest_image: null,
         image_preview_url: null,
         inputValidation: true,
@@ -131,6 +131,10 @@ class Home extends Component {
         first_name, 
         last_name, 
         email, 
+        nationality,
+        sex,
+        place_of_birth,
+        date_of_birth,
         guest_image, 
         inputValidation, 
         emailValidation, 
@@ -138,7 +142,7 @@ class Home extends Component {
         fileNotFound 
     }) => {
         
-        inputValidation = exists(first_name) && exists(last_name) && exists(email);
+        inputValidation = exists(first_name) && exists(last_name) && exists(email) && exists(nationality) && exists(sex) && exists(place_of_birth) && exists(date_of_birth);
         console.log(inputValidation);
         emailValidation = this.validateEmail(email);
         console.log(emailValidation);

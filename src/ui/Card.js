@@ -58,20 +58,20 @@ const Card = (props) => {
                         </div>
                         <div className="card__details--info">
                             <p className="regular card__details--info__p">Nationality</p>
-                            <h2 className="semi-bold card__details--info__h">{ nationality }</h2>
+                            <h2 className="semi-bold card__details--info__h">{ nationality ? nationality : "XXXX" }</h2>
                         </div>
                         <div className="card__details--info">
                             <p className="regular card__details--info__p">Date of Birth</p>
-                            <h2 className="semi-bold card__details--info__h">{ formattedDate }</h2>
+                            <h2 className="semi-bold card__details--info__h">{ formattedDate ? formattedDate : "XX-XX" }</h2>
                         </div>
                         <div className="card__details--info split">
                             <div>
                                 <p className="regular card__details--info__p">Sex</p>
-                                <h2 className="semi-bold card__details--info__h">{ sex }</h2>
+                                <h2 className="semi-bold card__details--info__h">{ sex ? sex : "X" }</h2>
                             </div>
                             <div>
                                 <p className="regular card__details--info__p">Place of Birth</p>
-                                <h2 className="semi-bold card__details--info__h">{ place_of_birth }</h2>
+                                <h2 className="semi-bold card__details--info__h">{ place_of_birth ? place_of_birth : "XXXX" }</h2>
                             </div>
                         </div>
                         <div className="card__details--info">
