@@ -94,7 +94,7 @@ class Home extends Component {
     fileTooLarge = (file) => {
             let fileSize = file.size;
             //check if file is larger than 250kb
-            if(fileSize > 1000000){
+            if(fileSize > 5000000){
                 return true;
             } else {
                 return false;

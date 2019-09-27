@@ -45,7 +45,7 @@
             border-radius: 5px;
         }
         input[type="file"]::after{
-            content: 'Max-Size 1mb';
+            content: 'Max-Size 5mb';
             color: $dark;
         }
         input[type="date"]{
