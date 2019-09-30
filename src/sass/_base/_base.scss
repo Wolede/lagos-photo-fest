@@ -127,6 +127,12 @@ ul{
 
 .passport__div{
     position: absolute;
+    z-index: 999;
+    @media (max-width: 767.98px) { 
+        width: 93%;
+        text-align: center;  
+    }
+    
 }
 
 section.home{

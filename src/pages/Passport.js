@@ -217,7 +217,7 @@ class Passport extends Component {
 
                 <p 
                     className="passport__link"
-                    onClick={this.goBack}> Go back</p>
+                    onClick={this.goBack}> Go Back to Change Details</p>
             </div>
         );
     }

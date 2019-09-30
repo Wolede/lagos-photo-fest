@@ -57,15 +57,16 @@
             // }
         }
         input[type="date"]::after{
-            content: ': Birthday';
+            content: 'Birthday (input any year)';
             position: absolute;
             top: 0;
-            right: 0;
-            padding: 1.25em .8em;
-            font-size: .8rem;
+            left: 0;
+            padding: 1.1em .8em;
+            font-size: .9rem;
             background-color: $white;
-            color: rgba($color: $black, $alpha: .7);
             border-radius: 5px;
+            width: 100%;
+            color: rgba($color: $black, $alpha: .7);
         }
         input[type="date"]:focus::after{
             content: '';

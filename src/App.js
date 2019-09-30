@@ -14,7 +14,7 @@ import Router from './routes/index';
 import Logout from './components/Logout';
 
 // Images
-import logo from "./assets/images/logo.png";
+import logo from "./assets/images/10th-Edition-LPF-Logo.png";
 
 class App extends Component {
 

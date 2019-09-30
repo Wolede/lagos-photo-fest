@@ -142,7 +142,7 @@ class Home extends Component {
         fileNotFound 
     }) => {
         
-        inputValidation = exists(first_name) && exists(last_name) && exists(email) && exists(nationality) && exists(sex) && exists(place_of_birth) && exists(date_of_birth);
+        inputValidation = exists(first_name) && exists(last_name) && exists(email) && exists(nationality) && exists(sex) && exists(place_of_birth) && date_of_birth;
         console.log(inputValidation);
         emailValidation = this.validateEmail(email);
         console.log(emailValidation);

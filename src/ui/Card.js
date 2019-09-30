@@ -95,7 +95,7 @@ const Card = (props) => {
             </div>
             <div className="card-footer">
                 <p>
-                    {"<PASSPORTS>>><LAGOSPHOTO>>>><FESTIVAL>>>>>>>>>>>>>>>>>>><OCTOBER><NOV><2019>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"}
+                    {"<PASSPORTS>>><LAGOSPHOTO>>>><FESTIVAL>>>>>>>>>>>>>>>>>>><27th><OCTOBER><2019>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"}
                 </p>
             </div>
         </div>
